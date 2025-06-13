@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+@layer components {
+  .backGround {
+    @apply w-screen h-screen flex p-0;
+  }
+
+  .logoSide {
+    @apply bg-[#EFEDEB] h-screen w-[60%] flex  items-center justify-center;
+  }
+
+  .blueLogo {
+    @apply w-[60%] mx-auto block;
+  }
+
+  .whiteLogo {
+    @apply mx-auto hidden;
+  }
+
+  .textLogo {
+    @apply mx-auto text-[#266FE8] text-lg font-bold p-10 w-[70%];
+  }
+
+  .formSide {
+    @apply bg-[#266FE8] text-white h-screen w-[40%] flex justify-center items-center;
+  }
+
+  .loginForm {
+    @apply w-[80%];
+  }
+
+  .textLogin {
+    @apply mx-auto text-5xl p-2 w-[70%];
+  }
+
+  .inputContainer {
+    @apply flex flex-col items-center py-4;
+  }
+
+  .inputName {
+    @apply w-[90%] text-left pb-2 font-bold;
+  }
+
+  .inputBox {
+    @apply bg-white rounded-sm w-[90%] p-2 text-black flex justify-end;
+  }
+
+  .passwordBox {
+    @apply w-[100%];
+  }
+
+  .forgotPassword {
+    @apply flex justify-end w-[95%];
+  }
+
+  .sideBtn {
+    @apply hover:underline;
+  }
+
+  .btnLogin {
+    @apply bg-white text-[#266FE8] w-[90%] h-[5%] font-bold rounded-2xl text-xl m-2 p-1 hover:bg-[#EFEDEB];
+  }
+
+  @media (max-width: 768px) {
+    .backGround {
+      @apply bg-blue-600 flex-col;
+    }
+
+    .logoSide {
+      @apply bg-blue-600 h-[30%] w-screen;
+    }
+
+    .blueLogo {
+      @apply hidden;
+    }
+
+    .whiteLogo {
+      @apply w-[60%] block;
+    }
+
+    .textLogo {
+      @apply hidden;
+    }
+
+    .formSide {
+      @apply bg-[#EFEDEB] text-[#266FE8] h-[70%] w-screen rounded-t-xl overscroll-auto;
+    }
+
+    .inputBox {
+      @apply border-1 border-[#266FE8];
+    }
+
+    .btnLogin {
+      @apply border-1 border-[#266FE8];
+    }
+  }
+}
