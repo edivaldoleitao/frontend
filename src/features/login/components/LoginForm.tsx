@@ -13,7 +13,6 @@ function Login() {
     <div className="loginForm">
       <form>
         <h1 className="textLogin">Login</h1>
-
         <Label variant="inputText" name="Email" id="email"></Label>
         <Label variant="Password" name="Senha" id="password"></Label>
         <div className="forgotPassword">
