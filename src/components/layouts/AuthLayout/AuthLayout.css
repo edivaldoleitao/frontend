@@ -47,7 +47,7 @@
     }
 
     .formSide {
-      @apply bg-[#EFEDEB] text-[#266FE8] h-[70%] w-screen rounded-t-xl overscroll-auto;
+      @apply bg-[#EFEDEB] text-[#266FE8] h-[70%] w-screen overscroll-auto;
     }
   }
 }

@@ -9,22 +9,6 @@
     @apply mx-auto text-5xl p-2 w-[70%];
   }
 
-  .inputContainer {
-    @apply flex flex-col items-center py-4;
-  }
-
-  .inputName {
-    @apply w-[90%] text-left pb-2 font-bold;
-  }
-
-  .inputBox {
-    @apply bg-white rounded-sm w-[90%] p-2 text-black flex justify-end;
-  }
-
-  .passwordBox {
-    @apply w-[100%];
-  }
-
   .forgotPassword {
     @apply flex justify-end w-[95%];
   }
@@ -33,16 +17,12 @@
     @apply hover:underline;
   }
 
-  .btnLogin {
+  .btnDefaultAuth {
     @apply bg-white text-[#266FE8] w-[90%] h-[5%] font-bold rounded-2xl text-xl m-2 p-1 hover:bg-[#EFEDEB];
   }
 
   @media (max-width: 768px) {
-    .inputBox {
-      @apply border-1 border-[#266FE8];
-    }
-
-    .btnLogin {
+    .btnDefaultAuth {
       @apply border-1 border-[#266FE8];
     }
   }

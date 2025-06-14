@@ -1,11 +1,8 @@
 import "./LoginForm.css";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Eye, EyeOff } from "lucide-react";
+import Label from "../../../components/common/Labels/Label.tsx";
 
 function Login() {
-  const [visible, setVisible] = useState(false);
-
   const navigate = useNavigate();
 
   function navigateToPage(page: string) {
@@ -16,31 +13,9 @@ function Login() {
     <div className="loginForm">
       <form>
         <h1 className="textLogin">Login</h1>
-        <div className="inputContainer">
-          <label className="inputName" htmlFor="email">
-            Email
-          </label>
-          <input className="inputBox" type="text" id="email"></input>
-        </div>
-        <div className="inputContainer">
-          <label className="inputName" htmlFor="password">
-            Senha
-          </label>
-          <div className="inputBox">
-            <input
-              type={visible ? "text" : "password"}
-              id="password"
-              className="passwordBox"
-            ></input>
-            <button
-              type="button"
-              onClick={() => setVisible((v) => !v)}
-              className="text-[#266FE8]"
-            >
-              {visible ? <EyeOff /> : <Eye />}
-            </button>
-          </div>
-        </div>
+
+        <Label variant="inputText" name="Email" id="email"></Label>
+        <Label variant="Password" name="Senha" id="password"></Label>
         <div className="forgotPassword">
           <button
             className="sideBtn"

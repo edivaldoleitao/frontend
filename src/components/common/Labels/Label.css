@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@layer components {
+  .inputContainer {
+    @apply flex flex-col items-center py-4;
+  }
+
+  .inputName {
+    @apply w-[90%] text-left pb-2 font-bold;
+  }
+
+  .inputBox {
+    @apply bg-white rounded-sm w-[90%] p-2 text-black flex justify-end;
+  }
+
+  .passwordBox {
+    @apply w-[100%];
+  }
+
+  @media (max-width: 768px) {
+    .inputBox {
+      @apply border-1 border-[#266FE8];
+    }
+  }
+}

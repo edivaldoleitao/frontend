@@ -10,7 +10,7 @@ const router = createBrowserRouter([
     element: <AuthLayout setLogin={true} />,
   },
   {
-    path: "/Register",
+    path: "/CreateAccount",
     element: <AuthLayout setLogin={false} />,
   },
 ]);
