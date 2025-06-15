@@ -1,9 +1,9 @@
 import "./Label.css";
-import type { ButtonProps } from "./index.ts";
+import type { LabelsProps } from "./index.ts";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 
-function Labels({ variant, name, id }: ButtonProps) {
+function Labels({ variant, name, id, value, onChange }: LabelsProps) {
   const [visible, setVisible] = useState(false);
 
   if (variant === "inputText") {
@@ -12,7 +12,14 @@ function Labels({ variant, name, id }: ButtonProps) {
         <label className="inputName" htmlFor={id}>
           {name}
         </label>
-        <input className="inputBox" type="text" id={id}></input>
+        <input
+          className="inputBox"
+          type="text"
+          id={id}
+          value={value}
+          onChange={onChange}
+          required
+        ></input>
       </div>
     );
   } else if (variant === "Password") {
@@ -26,6 +33,9 @@ function Labels({ variant, name, id }: ButtonProps) {
             type={visible ? "text" : "password"}
             id={id}
             className="passwordBox"
+            value={value}
+            onChange={onChange}
+            required
           ></input>
           <button
             type="button"

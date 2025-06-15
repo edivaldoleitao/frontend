@@ -1,7 +1,9 @@
-type ButtonType = "inputText" | "Password";
+type LabelType = "inputText" | "Password";
 
-export interface ButtonProps {
-  variant: ButtonType;
+export interface LabelsProps {
+  variant: LabelType;
   name: string;
   id: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }

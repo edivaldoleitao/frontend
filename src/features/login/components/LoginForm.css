@@ -21,6 +21,10 @@
     @apply bg-white text-[#266FE8] w-[90%] h-[5%] font-bold rounded-2xl text-xl m-2 p-1 hover:bg-[#EFEDEB];
   }
 
+  .errorMessage {
+    @apply text-red-600 text-sm w-[80] text-left;
+  }
+
   @media (max-width: 768px) {
     .btnDefaultAuth {
       @apply border-1 border-[#266FE8];
