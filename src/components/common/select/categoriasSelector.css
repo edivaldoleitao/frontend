@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+@layer components {
+  .categorias-container {
+    @apply w-[90%] mx-auto relative mb-4 flex flex-col items-start;
+  }
+
+  .categorias-label {
+    @apply w-[90%] text-left pb-2 font-bold self-start;
+  }
+
+  .categorias-input {
+    @apply bg-white rounded-sm w-[100%] p-2 text-black flex justify-end flex-wrap gap-2 min-h-[48px] cursor-pointer;
+  }
+
+  .categoria-tag {
+    @apply bg-[#f0eeeb] rounded-full px-3 py-1 text-sm font-bold text-[#266FE8] flex items-center;
+  }
+
+  .categoria-tag-remove {
+    @apply ml-2 cursor-pointer font-normal;
+  }
+
+  .categorias-icon {
+    @apply ml-auto text-[#266FE8] text-lg pointer-events-none;
+  }
+
+  .categorias-dropdown {
+    @apply absolute top-full left-0 right-0 bg-white border border-gray-300 rounded-xl mt-1 p-3 z-50 shadow-md text-black;
+  }
+
+  .categoria-option {
+    @apply flex items-center mb-2 text-sm cursor-pointer;
+  }
+
+  .categoria-option input {
+    @apply mr-2;
+  }
+
+  @media (max-width: 768px) {
+    .categorias-input {
+      @apply border border-[#266FE8];
+    }
+  }
+}

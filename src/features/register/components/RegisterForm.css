@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+@layer components {
+  .registerForm {
+    @apply w-[80%];
+  }
+
+  .textRegister {
+    @apply mx-auto text-5xl p-2 w-[70%];
+  }
+
+  .btnCadastrar {
+    @apply bg-white text-[#266FE8] w-[90%] h-[5%] font-bold rounded-2xl text-xl m-2 px-4 py-2 hover:bg-[#EFEDEB];
+  }
+
+  .errorMessage {
+    @apply text-red-600 text-sm w-[80] text-left;
+  }
+  
+
+  @media (max-width: 768px) {
+    .btnCadastrar {
+      @apply border-1 border-[#266FE8];
+    }
+  }
+}
