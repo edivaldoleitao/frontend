@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@layer components {
+  .backGround {
+    @apply w-screen h-screen flex p-0;
+  }
+
+  .logoSide {
+    @apply bg-[#EFEDEB] h-screen w-[60%] flex  items-center justify-center;
+  }
+
+  .blueLogo {
+    @apply w-[60%] mx-auto block;
+  }
+
+  .whiteLogo {
+    @apply mx-auto hidden;
+  }
+
+  .textLogo {
+    @apply mx-auto text-[#266FE8] text-lg font-bold p-10 w-[70%];
+  }
+
+  .formSide {
+    @apply bg-[#266FE8] text-white h-screen w-[40%] flex justify-center items-center;
+  }
+
+  @media (max-width: 768px) {
+    .backGround {
+      @apply bg-blue-600 flex-col;
+    }
+
+    .logoSide {
+      @apply bg-blue-600 h-[30%] w-screen;
+    }
+
+    .blueLogo {
+      @apply hidden;
+    }
+
+    .whiteLogo {
+      @apply w-[60%] block;
+    }
+
+    .textLogo {
+      @apply hidden;
+    }
+
+    .formSide {
+      @apply bg-[#EFEDEB] text-[#266FE8] h-[70%] w-screen overscroll-auto;
+    }
+  }
+}
