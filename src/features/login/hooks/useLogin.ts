@@ -42,6 +42,7 @@ export const useLogin = () => {
     password,
     setPassword,
     error,
+    setError,
     isLoading,
     handleLogin,
   };
