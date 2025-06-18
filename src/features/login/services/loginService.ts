@@ -5,14 +5,14 @@ import type {
   DjangoAuthCredentials,
 } from "../types/login.ts";
 
-const API_URL = "URL_TO_DJANGO_API";
+const API_URL = "http://localhost:8001/api/login/";
 
 export const loginApi = async (
   credentials: AuthCredentials
 ): Promise<AuthResponse> => {
   const apiCredentials: DjangoAuthCredentials = {
     email: credentials.email,
-    password: credentials.email,
+    password: credentials.password,
   };
 
   try {
