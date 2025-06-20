@@ -24,7 +24,7 @@ export const useLogin = () => {
       localStorage.setItem("accessToken", data.access);
       localStorage.setItem("refreshToken", data.refresh);
 
-      navigate("/home"); //URL pag principal
+      navigate("/home");
     } catch (err) {
       if (err instanceof Error) {
         setError(err.message);
@@ -42,6 +42,7 @@ export const useLogin = () => {
     password,
     setPassword,
     error,
+    setError,
     isLoading,
     handleLogin,
   };

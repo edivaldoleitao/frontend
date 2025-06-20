@@ -1,17 +1,15 @@
 interface AlertMessageProps {
-  type: "warning" | "error"
-  message: string
-  onClose: () => void
+  type: "warning" | "error";
+  message: string;
+  onClose?: () => void;
 }
 
 export function AlertMessage({ type, message, onClose }: AlertMessageProps) {
   const baseStyle =
-    "w-[90%] rounded-full py-2 px-4 flex justify-between items-center font-bold text-white mb-2 shadow"
+    "w-[100%] rounded-full py-2 px-4 flex justify-between items-center font-bold text-white mb-2 shadow";
 
   const typeStyle =
-    type === "warning"
-      ? "bg-yellow-500"
-      : "bg-red-500 border border-red-700"
+    type === "warning" ? "bg-yellow-500" : "bg-red-500 border border-red-700";
 
   return (
     <div className={`${baseStyle} ${typeStyle}`}>
@@ -20,5 +18,5 @@ export function AlertMessage({ type, message, onClose }: AlertMessageProps) {
         ✕
       </button>
     </div>
-  )
+  );
 }

@@ -2,16 +2,17 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import AuthLayout from "./components/layouts/AuthLayout/AuthLayout.tsx";
+import Login from "./features/login/components/LoginForm.tsx";
+import Register from "./features/register/components/RegisterForm.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/Login",
-    element: <AuthLayout setLogin={true} />,
+    element: <Login />,
   },
   {
     path: "/CreateAccount",
-    element: <AuthLayout setLogin={false} />,
+    element: <Register />,
   },
 ]);
 
