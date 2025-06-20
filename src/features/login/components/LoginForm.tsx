@@ -1,9 +1,8 @@
-import { useState } from "react";
 import "./LoginForm.css";
 import { useNavigate } from "react-router-dom";
 import { useLogin } from "../hooks/useLogin.ts";
 import { AlertMessage } from "../../../components/common/alert/AlertMessage.tsx";
-import Label from "../../../components/common/Labels/Label.tsx";
+import Label from "../../../components/common/labels/Label.tsx";
 import AuthLayout from "../../../components/layouts/AuthLayout/AuthLayout.tsx";
 
 //TODO: Mensagem de Erro

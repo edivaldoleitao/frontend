@@ -5,7 +5,9 @@ import type {
   DjangoAuthCredentials,
 } from "../types/login.ts";
 
-const API_URL = "http://localhost:8001/api/login/";
+const API_BASE_URL = import.meta.env.VITE_URL_DJANGO_API;
+
+const API_URL = `${API_BASE_URL}/login/`;
 
 export const loginApi = async (
   credentials: AuthCredentials
