@@ -1,22 +1,12 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import "./index.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import AuthLayout from "./components/layouts/AuthLayout/AuthLayout.tsx";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+import './index.css';
 
-const router = createBrowserRouter([
-  {
-    path: "/Login",
-    element: <AuthLayout setLogin={true} />,
-  },
-  {
-    path: "/CreateAccount",
-    element: <AuthLayout setLogin={false} />,
-  },
-]);
+const rootElement = document.getElementById('root') as HTMLElement;
 
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>
+ReactDOM.createRoot(rootElement).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
 );
