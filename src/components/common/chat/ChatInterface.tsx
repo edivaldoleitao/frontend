@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import roboBot from "../../../assets/trackbot.png";
 
@@ -9,6 +9,7 @@ interface ChatInterfaceProps {
 
 const ChatInterface: React.FC<ChatInterfaceProps> = ({ inputMessage, setInputMessage }) => {
   const navigate = useNavigate();
+  const [showLoginAlert, setShowLoginAlert] = useState(false);
 
   const handleSendMessage = () => {
     if (inputMessage.trim()) {
@@ -21,7 +22,10 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ inputMessage, setInputMes
     if (e.key === 'Enter') {
       const userData = localStorage.getItem('userData');
       if (!userData) {
-        navigate('/login');
+        setShowLoginAlert(true);
+        setTimeout(() => {
+          navigate('/login');
+        }, 2000); // redireciona após 2 segundos
         return;
       }
 
@@ -31,6 +35,13 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ inputMessage, setInputMes
 
   return (
     <div className="w-full px-6 mx-auto">
+      {showLoginAlert && (
+        <div className="bg-yellow-500 text-white font-medium px-6 py-2 rounded-full flex items-center justify-between shadow-md mb-4">
+          É necessário fazer login para prosseguir
+          <button onClick={() => setShowLoginAlert(false)} className="ml-4 text-white text-xl leading-none">&times;</button>
+        </div>
+      )}
+
       <div className="flex flex-col items-center mb-8">
         <img src={roboBot} alt="TrackBot" />
         <div className="text-center mb-8">
@@ -50,7 +61,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ inputMessage, setInputMes
             onChange={(e) => setInputMessage(e.target.value)}
             onKeyDown={handleKeyPress}
             placeholder="Para começar faça login ou crie sua conta"
-            className="flex-1 border-gray-200 focus:border-blue-500 focus:ring-blue-500 rounded-xl px-2 py-1.5 text-gray-700 placeholder-gray-400 text-sm"
+            className="flex-1 border-gray-200 focus:border-blue-500 focus:ring-blue-500 focus:outline-none rounded-xl px-2 py-1.5 text-gray-700 placeholder-gray-400 text-sm"
           />
           <button
             onClick={handleSendMessage}
