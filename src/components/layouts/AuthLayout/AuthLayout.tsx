@@ -1,10 +1,8 @@
 import "./AuthLayout.css";
 import { blueLogo, whiteLogo } from "./index.ts";
-import type { AuthLayoutProps } from "./index";
-import Login from "../../../features/login/components/LoginForm.tsx";
-import Register from "../../../features/register/components/RegisterForm.tsx";
+import type { AuthLayoutProps } from "./index.ts";
 
-function AuthLayout({ setLogin }: AuthLayoutProps) {
+function AuthLayout({ children }: AuthLayoutProps) {
   return (
     <div className="backGround">
       <div className="logoSide">
@@ -16,7 +14,7 @@ function AuthLayout({ setLogin }: AuthLayoutProps) {
           </h1>
         </div>
       </div>
-      <div className="formSide">{setLogin ? <Login /> : <Register />}</div>
+      <div className="formSide">{children}</div>
     </div>
   );
 }

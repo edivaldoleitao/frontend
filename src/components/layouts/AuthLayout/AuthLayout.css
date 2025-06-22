@@ -2,7 +2,7 @@
 
 @layer components {
   .backGround {
-    @apply w-screen h-screen flex p-0;
+    @apply w-screen h-auto flex p-0;
   }
 
   .logoSide {
@@ -22,7 +22,7 @@
   }
 
   .formSide {
-    @apply bg-[#266FE8] text-white h-screen w-[40%] flex justify-center items-center;
+    @apply bg-[#266FE8] text-white h-auto w-[40%] flex justify-center items-center;
   }
 
   @media (max-width: 768px) {
