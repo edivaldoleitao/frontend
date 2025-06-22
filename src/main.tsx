@@ -4,6 +4,7 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./features/login/components/LoginForm.tsx";
 import Register from "./features/register/components/RegisterForm.tsx";
+import Edit from "./features/editProfile/components/EditForm.tsx";
 
 const router = createBrowserRouter([
   {
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
   {
     path: "/CreateAccount",
     element: <Register />,
+  },
+  {
+    path: "/editProfile",
+    element: <Edit />,
   },
 ]);
 

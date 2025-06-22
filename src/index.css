@@ -1,8 +1,9 @@
 html,
 body,
 #root {
-  height: 100%;
+  background: #efedeb;
   margin: 0;
   padding: 0;
   text-align: center;
+  font-family: "Montserrat-Bold", Helvetica;
 }
