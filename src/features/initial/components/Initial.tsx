@@ -8,7 +8,7 @@ export default function Initial() {
 
   return (
     <div className="flex-1 flex flex-col">
-      <header className="flex justify-end items-center p-6 bg-white/10 backdrop-blur-sm">
+      <header className="flex justify-end items-center p-6">
         <div className="flex gap-3">
           <button
             onClick={() => navigate("/login")}
