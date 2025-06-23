@@ -1,3 +1,15 @@
+/* index.css */
+
+:root {
+  --font-roboto: 'Montserrat', sans-serif;
+  --font-heading: 'Inter', sans-serif;
+  --font-mono: 'Fira Code', monospace;
+
+  --color-primary: #2860F8;
+  --color-error: #D32F2F;
+  --color-success: #2E7D32;
+}
+
 html,
 body,
 #root {
@@ -5,4 +17,6 @@ body,
   margin: 0;
   padding: 0;
   text-align: center;
+  background-color: #efedeb;
 }
+

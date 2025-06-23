@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const API_BASE_URL = import.meta.env.VITE_URL_DJANGO_API;
+console.log('TESTE VITE_URL:', import.meta.env.VITE_URL_DJANGO_API);
 
 interface RequestOptions {
   method?: "GET" | "POST" | "PUT" | "PATCH" | "DELETE";

@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Label from "../../../components/common/labels/Label";
 import { useCriarUsuario } from "../hooks/useCriarUsuario";
 import "./RegisterForm.css";
 import { CategoriasSelector } from "../../../components/common/select/CategoriasSelector";
 import { AlertMessage } from "../../../components/common/alert/AlertMessage";
-import AuthLayout from "../../../components/layouts/AuthLayout/AuthLayout";
+import Label from "../../../components/common/Labels/Label";
 
 function Register() {
   const navigate = useNavigate();
@@ -51,7 +50,6 @@ function Register() {
   };
 
   return (
-    <AuthLayout>
       <div className="registerForm">
         <form onSubmit={handleSubmit}>
           {alertMessage && (
@@ -114,7 +112,6 @@ function Register() {
           </button>
         </form>
       </div>
-    </AuthLayout>
   );
 }
 
