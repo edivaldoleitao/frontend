@@ -20,7 +20,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ inputMessage, setInputMes
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
-      const userData = localStorage.getItem('userData');
+      const userData = localStorage.getItem('accessToken');
       if (!userData) {
         setShowLoginAlert(true);
         setTimeout(() => {

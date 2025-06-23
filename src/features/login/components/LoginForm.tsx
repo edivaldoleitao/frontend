@@ -2,10 +2,9 @@ import "./LoginForm.css";
 import { useNavigate } from "react-router-dom";
 import { useLogin } from "../hooks/useLogin.ts";
 import { AlertMessage } from "../../../components/common/alert/AlertMessage.tsx";
-import Label from "../../../components/common/labels/Label.tsx";
 import AuthLayout from "../../../components/layouts/AuthLayout/AuthLayout.tsx";
+import Label from "../../../components/common/Labels/Label.tsx";
 
-//TODO: Mensagem de Erro
 
 function Login() {
   const {
@@ -26,7 +25,6 @@ function Login() {
   }
 
   return (
-    <AuthLayout>
       <div className="loginForm">
         <form onSubmit={handleLogin}>
           {error && (
@@ -73,7 +71,6 @@ function Login() {
           </button>
         </form>
       </div>
-    </AuthLayout>
   );
 }
 
