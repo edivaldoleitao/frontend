@@ -1,19 +1,28 @@
 import "./EditForm.css";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Navbar, Labels } from "./index.ts";
+import { Labels } from "./index.ts";
 import { ChevronLeft } from "lucide-react";
 import { useEdit } from "../hooks/useEdit.ts";
 import { CategoriasSelector } from "../../../components/common/select/CategoriasSelector";
+import { AlertMessage } from "../../../components/common/alert/AlertMessage.tsx";
 
 function Edit() {
-  const { error, setError, isLoading, handleEdit } = useEdit();
-
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const {
+    name,
+    setName,
+    email,
+    setEmail,
+    password,
+    setPassword,
+    confirmPassword,
+    setConfirmPassword,
+    selectedCategories,
+    setSelectedCategories,
+    error,
+    setError,
+    isLoading,
+    handleEdit,
+  } = useEdit();
 
   const navigate = useNavigate();
 
@@ -23,7 +32,13 @@ function Edit() {
 
   return (
     <div className="background">
-      <Navbar />
+      {error && (
+        <AlertMessage
+          type="error"
+          message={error}
+          onClose={() => setError("")}
+        />
+      )}
       <div className="pageContent">
         <div className="leftSide">
           <ChevronLeft
@@ -39,6 +54,7 @@ function Edit() {
               name="Nome"
               id="name"
               value={name}
+              placeholder={name}
               onChange={(e) => setName(e.target.value)}
             />
             <Labels
@@ -46,6 +62,7 @@ function Edit() {
               name="Email"
               id="email"
               value={email}
+              placeholder={email}
               onChange={(e) => setEmail(e.target.value)}
             />
             <Labels
@@ -53,6 +70,7 @@ function Edit() {
               name="Senha"
               id="password"
               value={password}
+              placeholder="**********"
               onChange={(e) => setPassword(e.target.value)}
             />
             <Labels
@@ -60,6 +78,7 @@ function Edit() {
               name="Confirmar Senha"
               id="confirmPassword"
               value={confirmPassword}
+              placeholder="**********"
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
             <CategoriasSelector
@@ -69,7 +88,9 @@ function Edit() {
               setSelected={setSelectedCategories}
             />
             <div className="teste">
-              <button className="btnDefault delete">Excluir Conta</button>
+              <button className="btnDefault delete" onClick={handleEdit}>
+                Excluir Conta
+              </button>
               <button type="submit" className="btnDefault">
                 {isLoading ? "Salvando..." : "Salvar"}
               </button>

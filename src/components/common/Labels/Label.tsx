@@ -3,7 +3,14 @@ import type { LabelsProps } from "./index.ts";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 
-function Labels({ variant, name, id, value, onChange }: LabelsProps) {
+function Labels({
+  variant,
+  name,
+  id,
+  value,
+  onChange,
+  placeholder = "",
+}: LabelsProps) {
   const [visible, setVisible] = useState(false);
 
   if (variant === "inputText") {
@@ -18,6 +25,7 @@ function Labels({ variant, name, id, value, onChange }: LabelsProps) {
           id={id}
           value={value}
           onChange={onChange}
+          placeholder={placeholder}
           required
         ></input>
       </div>
@@ -35,7 +43,7 @@ function Labels({ variant, name, id, value, onChange }: LabelsProps) {
             className="passwordBox"
             value={value}
             onChange={onChange}
-            required
+            placeholder={placeholder}
           ></input>
           <button
             type="button"
