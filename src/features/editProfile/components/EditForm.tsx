@@ -5,12 +5,13 @@ import { ChevronLeft } from "lucide-react";
 import { useEdit } from "../hooks/useEdit.ts";
 import { CategoriasSelector } from "../../../components/common/select/CategoriasSelector";
 import { AlertMessage } from "../../../components/common/alert/AlertMessage.tsx";
+import { useAuth } from "../../../context/AuthContext.tsx";
+import { useEffect } from "react";
 
 function Edit() {
   const {
-    name,
+    setId,
     setName,
-    email,
     setEmail,
     password,
     setPassword,
@@ -23,6 +24,16 @@ function Edit() {
     isLoading,
     handleEdit,
   } = useEdit();
+
+  const { user } = useAuth();
+  if (!user) return null;
+
+  useEffect(() => {
+    if (user && user.id) {
+      setId(user.id);
+      setSelectedCategories(user.categories);
+    }
+  }, [user, setId]);
 
   const navigate = useNavigate();
 
@@ -41,10 +52,7 @@ function Edit() {
       )}
       <div className="pageContent">
         <div className="leftSide">
-          <ChevronLeft
-            className="arrow"
-            onClick={() => navigateToPage("/home")}
-          />
+          <ChevronLeft className="arrow" onClick={() => navigateToPage("/")} />
         </div>
         <form onSubmit={handleEdit}>
           <div className="form">
@@ -53,16 +61,14 @@ function Edit() {
               variant="inputText"
               name="Nome"
               id="name"
-              value={name}
-              placeholder={name}
+              value={user.name}
               onChange={(e) => setName(e.target.value)}
             />
             <Labels
               variant="inputText"
               name="Email"
               id="email"
-              value={email}
-              placeholder={email}
+              value={user.email}
               onChange={(e) => setEmail(e.target.value)}
             />
             <Labels

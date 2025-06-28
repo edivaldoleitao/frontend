@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { FetchUserData } from "../../../service/fetchUserData";
+import { useState } from "react";
 import { changePassword, changeUserData } from "../services/editService";
 
 export const useEdit = () => {
@@ -41,18 +40,8 @@ export const useEdit = () => {
     }
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const userData = await FetchUserData(localStorage.getItem("accessToken"));
-      setId(userData.id);
-      setName(userData.name);
-      setEmail(userData.email);
-      setSelectedCategories(userData.categories);
-    };
-    fetchData();
-  }, []);
-
   return {
+    setId,
     name,
     setName,
     email,

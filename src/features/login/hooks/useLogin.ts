@@ -22,7 +22,6 @@ export const useLogin = () => {
       const data = await loginApi(credentials);
 
       localStorage.setItem("accessToken", data.access);
-      localStorage.setItem("refreshToken", data.refresh);
 
       navigate("/");
     } catch (err) {
