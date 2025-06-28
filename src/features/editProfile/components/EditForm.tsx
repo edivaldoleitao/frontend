@@ -23,6 +23,7 @@ function Edit() {
     setError,
     isLoading,
     handleEdit,
+    handleExclusion,
   } = useEdit();
 
   const { user } = useAuth();
@@ -93,8 +94,8 @@ function Edit() {
               selected={selectedCategories}
               setSelected={setSelectedCategories}
             />
-            <div className="teste">
-              <button className="btnDefault delete" onClick={handleEdit}>
+            <div>
+              <button className="btnDefault delete" onClick={handleExclusion}>
                 Excluir Conta
               </button>
               <button type="submit" className="btnDefault">

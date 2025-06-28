@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { changePassword, changeUserData } from "../services/editService";
+import {
+  changePassword,
+  changeUserData,
+  deleteUser,
+} from "../services/editService";
+import { useNavigate } from "react-router-dom";
 
 export const useEdit = () => {
   const [id, setId] = useState("");
@@ -10,6 +15,8 @@ export const useEdit = () => {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleEdit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,6 +47,21 @@ export const useEdit = () => {
     }
   };
 
+  const handleExclusion = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError(null);
+    try {
+      await deleteUser(id);
+    } catch (err: any) {
+      setError("Erro ao deletar a conta");
+      return null;
+    } finally {
+      setIsLoading(false);
+      navigate("/login");
+    }
+  };
+
   return {
     setId,
     name,
@@ -56,5 +78,6 @@ export const useEdit = () => {
     setError,
     isLoading,
     handleEdit,
+    handleExclusion,
   };
 };

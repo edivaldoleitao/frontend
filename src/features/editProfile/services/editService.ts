@@ -25,3 +25,9 @@ export async function changeUserData(
     data: userData,
   });
 }
+
+export async function deleteUser(id: string) {
+  return await apiRequest<changeUserDataResponse>(`/delete_user/${id}/`, {
+    method: "DELETE",
+  });
+}
