@@ -1,5 +1,5 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import ProductCard from "../../../components/common/cards/produtctCard/ProductCard";
+import ProductCard from "../../../components/common/cards/produtctCard/recommended/ProductCardRecommended";
 import type { Product } from "../types/type";
 
 
