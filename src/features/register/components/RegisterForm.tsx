@@ -4,7 +4,7 @@ import { useCriarUsuario } from "../hooks/useCriarUsuario";
 import "./RegisterForm.css";
 import { CategoriasSelector } from "../../../components/common/select/CategoriasSelector";
 import { AlertMessage } from "../../../components/common/alert/AlertMessage";
-import Label from "../../../components/common/Labels/Label";
+import Label from "../../../components/common/labels/Label.tsx";
 
 function Register() {
   const navigate = useNavigate();
@@ -50,68 +50,68 @@ function Register() {
   };
 
   return (
-      <div className="registerForm">
-        <form onSubmit={handleSubmit}>
-          {alertMessage && (
-            <AlertMessage
-              type={alertType}
-              message={alertMessage}
-              onClose={() => setAlertMessage("")}
-            />
-          )}
-          <h1 className="textRegister">Cadastro</h1>
-
-          <Label
-            variant="inputText"
-            name="Nome"
-            id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+    <div className="registerForm">
+      <form onSubmit={handleSubmit}>
+        {alertMessage && (
+          <AlertMessage
+            type={alertType}
+            message={alertMessage}
+            onClose={() => setAlertMessage("")}
           />
-          <Label
-            variant="inputText"
-            name="Email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <Label
-            variant="Password"
-            name="Senha"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <Label
-            variant="Password"
-            name="Confirmar Senha"
-            id="confirmPassword"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
+        )}
+        <h1 className="textRegister">Cadastro</h1>
 
-          <CategoriasSelector
-            label="Categorias Favoritas"
-            options={["gamer", "home_office", "estudo"]}
-            selected={selectedCategories}
-            setSelected={setSelectedCategories}
-          />
+        <Label
+          variant="inputText"
+          name="Nome"
+          id="name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <Label
+          variant="inputText"
+          name="Email"
+          id="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <Label
+          variant="Password"
+          name="Senha"
+          id="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <Label
+          variant="Password"
+          name="Confirmar Senha"
+          id="confirmPassword"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+        />
 
-          <button type="submit" className="btnCadastrar" disabled={loading}>
-            {loading ? "Cadastrando..." : "Cadastrar"}
-          </button>
+        <CategoriasSelector
+          label="Categorias Favoritas"
+          options={["gamer", "home_office", "estudo"]}
+          selected={selectedCategories}
+          setSelected={setSelectedCategories}
+        />
 
-          <br />
+        <button type="submit" className="btnCadastrar" disabled={loading}>
+          {loading ? "Cadastrando..." : "Cadastrar"}
+        </button>
 
-          <button
-            type="button"
-            className="sideBtn text-lg font-bold"
-            onClick={() => navigate("/login")}
-          >
-            Já possui login?
-          </button>
-        </form>
-      </div>
+        <br />
+
+        <button
+          type="button"
+          className="sideBtn text-lg font-bold"
+          onClick={() => navigate("/login")}
+        >
+          Já possui login?
+        </button>
+      </form>
+    </div>
   );
 }
 
