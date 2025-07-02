@@ -9,6 +9,7 @@ import DealsPage from './pages/deals';
 import ListProductsPage from './pages/listProducts';
 import PrivateRoute from './routes/PrivateRoute';
 import EditProfile from './pages/editProfile';
+import HomePage from './pages/home';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<InitialPage />} />
+          <Route path="/home" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/CreateUser" element={<RegisterPage />} />
           <Route
