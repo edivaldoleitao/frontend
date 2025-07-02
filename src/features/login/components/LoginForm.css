@@ -24,7 +24,6 @@
   .errorMessage {
     @apply text-red-600 text-sm w-[80] text-left;
   }
-  
 
   @media (max-width: 768px) {
     .btnDefaultAuth {

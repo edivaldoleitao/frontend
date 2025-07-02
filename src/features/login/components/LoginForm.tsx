@@ -3,8 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useLogin } from "../hooks/useLogin.ts";
 import { AlertMessage } from "../../../components/common/alert/AlertMessage.tsx";
 import AuthLayout from "../../../components/layouts/AuthLayout/AuthLayout.tsx";
-import Label from "../../../components/common/Labels/Label.tsx";
-
+import Label from "../../../components/common/labels/Label.tsx";
 
 function Login() {
   const {
@@ -25,52 +24,52 @@ function Login() {
   }
 
   return (
-      <div className="loginForm">
-        <form onSubmit={handleLogin}>
-          {error && (
-            <AlertMessage
-              type="error"
-              message={error}
-              onClose={() => setError("")}
-            />
-          )}
-          <h1 className="textLogin">Login</h1>
-          <Label
-            variant="inputText"
-            name="Email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          ></Label>
-          <Label
-            variant="Password"
-            name="Senha"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          ></Label>
-          <div className="forgotPassword">
-            <button
-              typeof="button"
-              className="sideBtn"
-              onClick={() => navigateToPage("/PasswordRecover")}
-            >
-              Esqueceu a senha?
-            </button>
-          </div>
-          <button type="submit" className="btnDefaultAuth">
-            {isLoading ? "Entrando..." : "Entrar"}
-          </button>
-          <br />
+    <div className="loginForm">
+      <form onSubmit={handleLogin}>
+        {error && (
+          <AlertMessage
+            type="error"
+            message={error}
+            onClose={() => setError("")}
+          />
+        )}
+        <h1 className="textLogin">Login</h1>
+        <Label
+          variant="inputText"
+          name="Email"
+          id="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        ></Label>
+        <Label
+          variant="Password"
+          name="Senha"
+          id="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        ></Label>
+        <div className="forgotPassword">
           <button
             typeof="button"
             className="sideBtn"
-            onClick={() => navigateToPage("/CreateAccount")}
+            onClick={() => navigateToPage("/PasswordRecover")}
           >
-            Ou crie sua conta
+            Esqueceu a senha?
           </button>
-        </form>
-      </div>
+        </div>
+        <button type="submit" className="btnDefaultAuth">
+          {isLoading ? "Entrando..." : "Entrar"}
+        </button>
+        <br />
+        <button
+          typeof="button"
+          className="sideBtn"
+          onClick={() => navigateToPage("/CreateAccount")}
+        >
+          Ou crie sua conta
+        </button>
+      </form>
+    </div>
   );
 }
 
