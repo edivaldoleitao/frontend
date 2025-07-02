@@ -8,6 +8,7 @@ import UpgradePage from "./pages/upgrade";
 import DealsPage from "./pages/deals";
 import EditProfile from "./pages/editProfile";
 import PrivateRoute from "./routes/PrivateRoute";
+import ProductPage from "./pages/productDetail/ProductDetail";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/descobrir" element={<DiscoverPage />} />
           <Route path="/upgrade" element={<UpgradePage />} />
           <Route path="/ofertas" element={<DealsPage />} />
+          <Route path="/product/:id" element={<ProductPage />} />
         </Routes>
       </BrowserRouter>
     </div>

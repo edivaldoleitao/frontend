@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+@layer components {
+  .arrow {
+    @apply text-[#1F4BC2]  text-5xl w-[1em] h-[1em];
+  }
+
+  .contentPage {
+    @apply max-w-6xl mx-auto px-6 py-8;
+  }
+
+  .productTittle {
+    @apply text-3xl font-bold text-gray-900 mb-4;
+  }
+
+  .productCard {
+    @apply bg-white rounded-2xl shadow-lg p-8 border border-gray-100;
+  }
+
+  .content {
+    @apply grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8;
+  }
+
+  .save {
+    @apply flex items-center space-x-2 text-gray-600 hover:text-red-500 transition-colors;
+  }
+
+  .alert {
+    @apply flex items-center space-x-2 text-gray-600 hover:text-blue-600 transition-colors;
+  }
+
+  .price {
+    @apply bg-gradient-to-r from-blue-600 to-blue-700 text-white px-8 py-4 rounded-2xl inline-block my-10;
+  }
+}
