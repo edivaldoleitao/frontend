@@ -8,12 +8,20 @@ import UpgradePage from "./pages/upgrade";
 import DealsPage from "./pages/deals";
 import EditProfile from "./pages/editProfile";
 import PrivateRoute from "./routes/PrivateRoute";
+import HomePage from "./pages/home";
+import ListProductsPage from "./pages/listProducts";
 
 function App() {
   return (
     <div>
       <BrowserRouter>
         <Routes>
+          <Route path='/' element={<InitialPage />} />
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/CreateUser" element={<RegisterPage />} />
+          
+          <Route path="/discover" element={<DiscoverPage />} />
           <Route path="/" element={<InitialPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/CreateUser" element={<RegisterPage />} />
@@ -27,7 +35,8 @@ function App() {
           />
           <Route path="/descobrir" element={<DiscoverPage />} />
           <Route path="/upgrade" element={<UpgradePage />} />
-          <Route path="/ofertas" element={<DealsPage />} />
+          <Route path="/deals" element={<DealsPage />} />
+          <Route path="/produtos" element={<ListProductsPage />} />
         </Routes>
       </BrowserRouter>
     </div>
