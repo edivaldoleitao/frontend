@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@layer components {
+  .navbar {
+    @apply bg-[#266FE8] w-[100vw] h-[13vh] p-[1rem] flex justify-between;
+  }
+
+  .logo {
+    @apply h-[100%] w-auto;
+  }
+
+  .searchBar {
+    @apply flex flex-col align-middle justify-center h-[80%] w-[60%] bg-white rounded-[200px];
+  }
+
+  .perfil {
+    @apply h-auto w-[5%] text-white;
+  }
+}

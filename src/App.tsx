@@ -1,13 +1,15 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import './index.css';
-import InitialPage from './pages/initial';
-import LoginPage from './pages/login';
-import RegisterPage from './pages/register';
-import DiscoverPage from './pages/discover';
-import UpgradePage from './pages/upgrade';
-import DealsPage from './pages/deals';
-import ListProductsPage from './pages/listProducts';
-import HomePage from './pages/home';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "./index.css";
+import InitialPage from "./pages/initial";
+import LoginPage from "./pages/login";
+import RegisterPage from "./pages/register";
+import DiscoverPage from "./pages/discover";
+import UpgradePage from "./pages/upgrade";
+import DealsPage from "./pages/deals";
+import EditProfile from "./pages/editProfile";
+import PrivateRoute from "./routes/PrivateRoute";
+import HomePage from "./pages/home";
+import ListProductsPage from "./pages/listProducts";
 
 function App() {
   return (
@@ -20,6 +22,18 @@ function App() {
           <Route path="/CreateUser" element={<RegisterPage />} />
           
           <Route path="/discover" element={<DiscoverPage />} />
+          <Route path="/" element={<InitialPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/CreateUser" element={<RegisterPage />} />
+          <Route
+            path="/EditProfile"
+            element={
+              <PrivateRoute>
+                <EditProfile />
+              </PrivateRoute>
+            }
+          />
+          <Route path="/descobrir" element={<DiscoverPage />} />
           <Route path="/upgrade" element={<UpgradePage />} />
           <Route path="/deals" element={<DealsPage />} />
           <Route path="/produtos" element={<ListProductsPage />} />

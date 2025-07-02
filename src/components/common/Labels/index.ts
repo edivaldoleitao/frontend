@@ -6,4 +6,5 @@ export interface LabelsProps {
   id: string;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  placeholder?: string;
 }

@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const API_BASE_URL = import.meta.env.VITE_URL_DJANGO_API;
-console.log('TESTE VITE_URL:', import.meta.env.VITE_URL_DJANGO_API);
 
 interface RequestOptions {
   method?: "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
@@ -29,9 +28,7 @@ export async function apiRequest<T = any>(
     return response.data;
   } catch (error: any) {
     if (error.response) {
-      throw new Error(
-        error.response.data?.message || error.response.statusText
-      );
+      throw new Error(error.response.data || error.response.statusText);
     } else if (error.request) {
       throw new Error("Nenhuma resposta do servidor");
     } else {
