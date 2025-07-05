@@ -1,18 +1,23 @@
-import type { ReactNode } from "react";
+
+import { useNavigate } from "react-router-dom";
 import AppBar from "../../common/appBar";
+import type { ReactNode } from "react";
 
-
-interface LayoutProps {
+interface HomeLayoutProps {
   children: ReactNode;
 }
 
-const HomeLayout = ({ children }: LayoutProps) => {
+const HomeLayout = ({ children }: HomeLayoutProps) => {
+  const navigate = useNavigate();
+
+  const handleSearch = (query: string) => {
+    navigate(`/produtos?q=${encodeURIComponent(query)}`);
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50">
-      <AppBar />
-      <main className="pb-6">
-        {children}
-      </main>
+    <div className="min-h-screen flex flex-col">
+      <AppBar onSearch={handleSearch} />
+      <main className="flex-1">{children}</main>
     </div>
   );
 };

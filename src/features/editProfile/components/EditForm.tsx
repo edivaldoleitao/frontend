@@ -12,7 +12,9 @@ import Error from "../../../components/layouts/error/Error.tsx";
 function Edit() {
   const {
     setId,
+    name,
     setName,
+    email,
     setEmail,
     password,
     setPassword,
@@ -32,6 +34,8 @@ function Edit() {
 
   useEffect(() => {
     if (user && user.id) {
+      setName(user.name);
+      setEmail(user.email);
       setId(user.id);
       setSelectedCategories(user.categories);
     }
@@ -63,14 +67,14 @@ function Edit() {
               variant="inputText"
               name="Nome"
               id="name"
-              value={user.name}
+              value={name}
               onChange={(e) => setName(e.target.value)}
             />
             <Labels
               variant="inputText"
               name="Email"
               id="email"
-              value={user.email}
+              value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
             <Labels
