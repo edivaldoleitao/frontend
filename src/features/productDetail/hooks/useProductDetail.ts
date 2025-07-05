@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import type { fetchPrdouctResponse } from "../components";
-import { fetchPrdouctData } from "../services/productDetailService";
+import type { ProductData } from "../components";
+import { fetchProductData } from "../services/productDetailService";
 import { useParams } from "react-router-dom";
 
 export const useDetail = () => {
   const [error, setError] = useState<string | null>(null);
-  const [product, setProduct] = useState<fetchPrdouctResponse | null>(null);
+  const [product, setProduct] = useState<ProductData | null>(null);
   const { id } = useParams();
 
   useEffect(() => {
@@ -16,7 +16,7 @@ export const useDetail = () => {
       }
 
       try {
-        const productData = await fetchPrdouctData(Number(id));
+        const productData = await fetchProductData(Number(id));
         setProduct(productData);
       } catch (err) {
         if (err instanceof Error) {

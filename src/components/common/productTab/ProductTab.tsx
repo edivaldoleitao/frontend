@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./ProductTab.css";
-import { lojas } from "../../../features/productDetail/components";
+import type { OtherStores } from "../../../features/productDetail/components";
+import { useNavigate } from "react-router-dom";
 
 interface Tab {
   id: string;
@@ -9,11 +10,17 @@ interface Tab {
 
 interface ProductTabsProps {
   specific_info: Record<string, any>;
-  stores: Record<string, any>;
+  stores: OtherStores[];
+  description: string;
 }
 
-const ProductTabs: React.FC<ProductTabsProps> = ({ specific_info, stores }) => {
+const ProductTabs: React.FC<ProductTabsProps> = ({
+  specific_info,
+  stores,
+  description,
+}) => {
   const [activeTab, setActiveTab] = useState<string>("lojas");
+  const navigate = useNavigate();
   const tabs: Tab[] = [
     { id: "lojas", label: "Lojas" },
     { id: "ficha", label: "Ficha Técnica" },
@@ -40,34 +47,45 @@ const ProductTabs: React.FC<ProductTabsProps> = ({ specific_info, stores }) => {
         <div className="product-tabs-content">
           {activeTab === "lojas" && (
             <div className="store-list">
-              {Object.entries(lojas).map(([key, value]) => (
-                <div className="store-item" key={key}>
-                  <span className="store-label">
-                    {key
-                      .replace(/_/g, " ")
-                      .replace(/\b\w/g, (l) => l.toUpperCase())}
-                    :
-                  </span>
-                  <span className="store-value">{String(value)}</span>
-                </div>
+              {stores.map((store) => (
+                <button
+                  key={store.price_id}
+                  className="store-button"
+                  onClick={() => navigate(`/product/${store.price_id}`)}
+                  type="button"
+                >
+                  <span className="store-label">{store.store_name}:</span>
+                  <span className="store-value">R$ {store.value}</span>
+                </button>
               ))}
             </div>
           )}
-
           {activeTab === "ficha" && (
-            <div className="specs-list">
-              {Object.entries(specific_info).map(([key, value]) => (
-                <div className="spec-item" key={key}>
-                  <span className="spec-label">
-                    {key
-                      .replace(/_/g, " ")
-                      .replace(/\b\w/g, (l) => l.toUpperCase())}
-                    :
-                  </span>
-                  <span className="spec-value">{String(value)}</span>
-                </div>
-              ))}
-            </div>
+            <>
+              <ul className="specs-list text-left indent-4 mb-4">
+                {description.split("\n").map((line, idx) =>
+                  line.trim() ? (
+                    <li key={idx} className="spec-item spec-label">
+                      {line}
+                    </li>
+                  ) : null
+                )}
+              </ul>
+
+              <div className="specs-list">
+                {Object.entries(specific_info).map(([key, value]) => (
+                  <div className="spec-item" key={key}>
+                    <span className="spec-label">
+                      {key
+                        .replace(/_/g, " ")
+                        .replace(/\b\w/g, (l) => l.toUpperCase())}
+                      :
+                    </span>
+                    <span className="spec-value">{String(value)}</span>
+                  </div>
+                ))}
+              </div>
+            </>
           )}
 
           {activeTab === "avaliacoes" && (

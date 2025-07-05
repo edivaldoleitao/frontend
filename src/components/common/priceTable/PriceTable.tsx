@@ -6,17 +6,15 @@ import {
   ResponsiveContainer,
   Tooltip,
 } from "recharts";
-
-interface PriceData {
-  date: string;
-  price: number;
-}
+import type { PriceEntry } from "../../../features/productDetail/components";
 
 interface PriceTableProps {
-  data: PriceData[];
+  data: PriceEntry[];
 }
 
 const PriceTable: React.FC<PriceTableProps> = ({ data }) => {
+  const reversedData = [...data].reverse();
+
   return (
     <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
       <h3 className="text-lg font-semibold text-gray-800 mb-4">
@@ -24,9 +22,9 @@ const PriceTable: React.FC<PriceTableProps> = ({ data }) => {
       </h3>
       <div className="h-64">
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={data}>
+          <LineChart data={reversedData}>
             <XAxis
-              dataKey="date"
+              dataKey="collection_date"
               axisLine={false}
               tickLine={false}
               tick={{ fontSize: 12, fill: "#666" }}
@@ -49,7 +47,7 @@ const PriceTable: React.FC<PriceTableProps> = ({ data }) => {
             />
             <Line
               type="monotone"
-              dataKey="price"
+              dataKey="value"
               stroke="#1e40af"
               strokeWidth={3}
               dot={{ fill: "#1e40af", strokeWidth: 2, r: 4 }}

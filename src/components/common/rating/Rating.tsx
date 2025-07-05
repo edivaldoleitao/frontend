@@ -2,7 +2,7 @@ import { Star } from "lucide-react";
 
 interface RatingProps {
   rating: number;
-  review: number; // Changed to 'review' to match the ProductDetailComponent usage
+  review: number | string; // Changed to 'review' to match the ProductDetailComponent usage
 }
 
 const Rating = ({ rating, review }: RatingProps) => {

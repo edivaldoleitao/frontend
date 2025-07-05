@@ -1,5 +1,22 @@
 @import "tailwindcss";
 
+.store-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background: #f1f5f9;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.store-button:hover {
+  background: #e0e7ef;
+}
+
 @layer components {
   .product-tabs-container {
     @apply max-w-6xl mx-auto px-6;
@@ -26,6 +43,10 @@
   }
 
   /* Estilos para a aba de Lojas */
+  .store-button {
+    @apply flex justify-between items-center w-full bg-gray-50 rounded-lg px-4 py-3 hover:bg-gray-100 transition-colors border border-gray-200;
+  }
+
   .store-list {
     @apply max-w-4xl mx-auto space-y-4;
   }
