@@ -1,6 +1,8 @@
-import imgTeste from "../../../assets/placaTeste.png";
+import LogoAmazon from "../../../assets/icons/amazon.svg";
+import LogoTerabyte from "../../../assets/icons/terabyte.png";
+import LogoKabum from "../../../assets/icons/kabum.png";
 
-export { imgTeste };
+export { LogoAmazon, LogoTerabyte, LogoKabum };
 
 // Interface para o objeto de produto principal
 export interface Product {
@@ -33,7 +35,7 @@ export interface PriceEntry {
 export interface OtherStores {
   store_name: string;
   value: number;
-  price_id: number;
+  ps_id: number;
 }
 
 // Interface principal que une todas as outras

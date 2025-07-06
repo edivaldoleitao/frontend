@@ -49,9 +49,9 @@ const ProductTabs: React.FC<ProductTabsProps> = ({
             <div className="store-list">
               {stores.map((store) => (
                 <button
-                  key={store.price_id}
+                  key={store.ps_id}
                   className="store-button"
-                  onClick={() => navigate(`/product/${store.price_id}`)}
+                  onClick={() => navigate(`/product/${store.ps_id}`)}
                   type="button"
                 >
                   <span className="store-label">{store.store_name}:</span>

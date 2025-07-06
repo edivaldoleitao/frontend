@@ -7,7 +7,7 @@ interface RatingProps {
 
 const Rating = ({ rating, review }: RatingProps) => {
   return (
-    <div className="flex items-center space-x-2">
+    <div className="flex items-center space-x-2 max-[400]:flex-col">
       <div className="flex items-center">
         {[1, 2, 3, 4, 5].map((star) => (
           <Star

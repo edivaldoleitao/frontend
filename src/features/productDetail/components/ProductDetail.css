@@ -30,6 +30,39 @@
   }
 
   .price {
-    @apply bg-gradient-to-r from-blue-600 to-blue-700 text-white px-8 py-4 rounded-2xl inline-block my-10;
+    @apply flex flex-row items-center  justify-between gap-4 bg-blue-600 text-white px-8 py-4 rounded-2xl my-10;
+  }
+
+  .infoProduct {
+    @apply flex items-center justify-between;
+  }
+}
+
+@media (max-width: 400px) {
+  .contentPage {
+    @apply px-2 py-4;
+  }
+
+  .productTittle {
+    @apply text-xl;
+  }
+
+  .productCard {
+    @apply p-4;
+  }
+
+  .price {
+    @apply flex-col gap-2 p-4;
+  }
+
+  .infoProduct {
+    @apply flex-col;
+  }
+
+  .content {
+    @apply gap-4;
+  }
+  .arrow {
+    @apply text-2xl;
   }
 }

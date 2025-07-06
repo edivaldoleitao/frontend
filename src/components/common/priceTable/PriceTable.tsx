@@ -13,8 +13,6 @@ interface PriceTableProps {
 }
 
 const PriceTable: React.FC<PriceTableProps> = ({ data }) => {
-  const reversedData = [...data].reverse();
-
   return (
     <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
       <h3 className="text-lg font-semibold text-gray-800 mb-4">
@@ -22,7 +20,7 @@ const PriceTable: React.FC<PriceTableProps> = ({ data }) => {
       </h3>
       <div className="h-64">
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={reversedData}>
+          <LineChart data={data}>
             <XAxis
               dataKey="collection_date"
               axisLine={false}
