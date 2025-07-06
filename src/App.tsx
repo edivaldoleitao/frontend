@@ -11,6 +11,8 @@ import PrivateRoute from "./routes/PrivateRoute";
 import ProductPage from "./pages/productDetail/ProductDetail";
 import HomePage from "./pages/home";
 import ListProductsPage from "./pages/listProducts";
+import RecoverPasswordPage from "./pages/forgotPassword/recoverPassword/RecoverPassword";
+import ChangePasswordPage from "./pages/forgotPassword/changePassword/ChangePassword";
 
 function App() {
   return (
@@ -21,7 +23,8 @@ function App() {
           <Route path="/home" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/CreateUser" element={<RegisterPage />} />
-
+          <Route path="/RecoverPassword" element={<RecoverPasswordPage />} />
+          <Route path="/ChangePassword/:id" element={<ChangePasswordPage />} />
           <Route path="/discover" element={<DiscoverPage />} />
           <Route path="/" element={<InitialPage />} />
           <Route path="/login" element={<LoginPage />} />
