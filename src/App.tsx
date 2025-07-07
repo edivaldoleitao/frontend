@@ -10,6 +10,8 @@ import EditProfile from "./pages/editProfile";
 import PrivateRoute from "./routes/PrivateRoute";
 import HomePage from "./pages/home";
 import ListProductsPage from "./pages/listProducts";
+import RecoverPasswordPage from "./pages/recoverPassword";
+import UpdatePasswordPage from "./pages/updatePassword";
 
 function App() {
   return (
@@ -37,6 +39,8 @@ function App() {
           <Route path="/upgrade" element={<UpgradePage />} />
           <Route path="/deals" element={<DealsPage />} />
           <Route path="/produtos" element={<ListProductsPage />} />
+          <Route path="/recover-password" element={<RecoverPasswordPage />}/>
+          <Route path="/update-password/:userId" element={<UpdatePasswordPage />}/>
         </Routes>
       </BrowserRouter>
     </div>

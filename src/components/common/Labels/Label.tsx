@@ -13,7 +13,7 @@ function Labels({
 }: LabelsProps) {
   const [visible, setVisible] = useState(false);
 
-  if (variant === "inputText") {
+  if (variant === "inputText" || variant === "Email") {
     return (
       <div className="inputContainer">
         <label className="inputName" htmlFor={id}>
@@ -21,7 +21,7 @@ function Labels({
         </label>
         <input
           className="inputBox"
-          type="text"
+          type={variant === "Email" ? "email" : "text"}
           id={id}
           value={value}
           onChange={onChange}

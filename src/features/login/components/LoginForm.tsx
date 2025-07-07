@@ -2,8 +2,7 @@ import "./LoginForm.css";
 import { useNavigate } from "react-router-dom";
 import { useLogin } from "../hooks/useLogin.ts";
 import { AlertMessage } from "../../../components/common/alert/AlertMessage.tsx";
-import AuthLayout from "../../../components/layouts/AuthLayout/AuthLayout.tsx";
-import Label from "../../../components/common/labels/Label.tsx";
+import Label from "../../../components/common/Labels/Label";
 
 function Login() {
   const {
@@ -52,7 +51,7 @@ function Login() {
           <button
             typeof="button"
             className="sideBtn"
-            onClick={() => navigateToPage("/PasswordRecover")}
+            onClick={() => navigateToPage("/recover-password")}
           >
             Esqueceu a senha?
           </button>

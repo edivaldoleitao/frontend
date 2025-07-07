@@ -1,4 +1,4 @@
-type LabelType = "inputText" | "Password";
+type LabelType = "inputText" | "Password" | "Email";
 
 export interface LabelsProps {
   variant: LabelType;

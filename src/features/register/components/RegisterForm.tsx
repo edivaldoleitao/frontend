@@ -4,7 +4,7 @@ import { useCriarUsuario } from "../hooks/useCriarUsuario";
 import "./RegisterForm.css";
 import { CategoriasSelector } from "../../../components/common/select/CategoriasSelector";
 import { AlertMessage } from "../../../components/common/alert/AlertMessage";
-import Label from "../../../components/common/labels/Label.tsx";
+import Label from "../../../components/common/Labels/Label";
 
 function Register() {
   const navigate = useNavigate();
