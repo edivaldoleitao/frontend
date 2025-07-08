@@ -1,6 +1,6 @@
 import "./ProductDetail.css";
 import PriceTable from "../../../components/common/priceTable/PriceTable";
-import { Bell, ChevronLeft, Heart } from "lucide-react";
+import { Bell, ChevronLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useDetail } from "../hooks/useProductDetail";
 import Rating from "../../../components/common/rating/Rating";
@@ -9,11 +9,12 @@ import Error from "../../../components/layouts/error/Error";
 import { AlertMessage } from "../../../components/common/alert/AlertMessage";
 import { useState } from "react";
 import AlertConfigModal from "../../../components/common/configPriceAlert/PriceAlert";
+import Favorite from "../../../components/common/favorite/Favorite";
 
 function ProductDetailComponent() {
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
-  const { product, imgStore, loading, error, setError } = useDetail();
-  const isFavorited = true;
+  const { product, imgStore, loading, error, setError, type_alert, setType } =
+    useDetail();
   const navigate = useNavigate();
 
   if (loading) return <div className="text-4xl p-5">Carregando...</div>;
@@ -24,7 +25,7 @@ function ProductDetailComponent() {
         <div className="w-[50%]">
           {error && (
             <AlertMessage
-              type="error"
+              type={type_alert}
               message={error}
               onClose={() => setError("")}
             />
@@ -43,7 +44,7 @@ function ProductDetailComponent() {
         <div className="contentPage">
           {error && (
             <AlertMessage
-              type="error"
+              type={type_alert}
               message={error}
               onClose={() => setError("")}
             />
@@ -66,15 +67,13 @@ function ProductDetailComponent() {
                   review="Falta coletar"
                 />
                 <div className="flex space-x-3 max-[400]:flex-col">
-                  <button className="save">
-                    <Heart
-                      className={`w-5 h-5 transition-all ${
-                        isFavorited ? "fill-red-500 text-red-500" : ""
-                      }`}
-                      fill={isFavorited ? "currentColor" : "none"}
-                    />
-                    <span className="text-sm">Salvar</span>
-                  </button>
+                  <Favorite
+                    product={product.product}
+                    miniature={false}
+                    isOpen={false}
+                    setType={setType}
+                    setError={setError}
+                  />
                   <button
                     className="alert"
                     onClick={() => setIsAlertModalOpen(true)}

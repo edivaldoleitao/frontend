@@ -7,7 +7,7 @@ import type {
 
 const API_BASE_URL = import.meta.env.VITE_URL_DJANGO_API;
 
-const API_URL = `${API_BASE_URL}/login/`;
+const API_URL = `${API_BASE_URL}/users/login/`;
 
 export const loginApi = async (
   credentials: AuthCredentials

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { requestChangePassword } from "../services/changePasswordService";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export const useChange = () => {
   const [password, setPassword] = useState("");
@@ -9,6 +9,7 @@ export const useChange = () => {
   const [error, setError] = useState<string | null>(null);
   const [type, setType] = useState<"error" | "warning" | "success">("success");
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const handleChange = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,7 +28,11 @@ export const useChange = () => {
 
       await requestChangePassword(changePasswordRequest, id);
       setType("success");
-      setError("Email enviado! verifique a caixa de e-mail!");
+      setError("Senha redefinida com sucesso!");
+
+      setTimeout(() => {
+        navigate("/login");
+      }, 3000);
     } catch (error: any) {
       setType("error");
       setError(error.message || "Erro ao solicitar a ");

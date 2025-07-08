@@ -13,9 +13,11 @@ export const useRecover = () => {
     setError(null);
 
     try {
-      await requestRecover(email);
+      const data = await requestRecover(email);
+
+      console.log(data);
       setType("success");
-      setEmail("Email enviado! verifique a caixa de e-mail!");
+      setError("Email enviado! verifique a caixa de e-mail!");
     } catch (error: any) {
       setType("error");
       setError(error.message || "Erro ao solicitar a ");

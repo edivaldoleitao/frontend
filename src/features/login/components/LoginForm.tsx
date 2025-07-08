@@ -51,7 +51,7 @@ function Login() {
           <button
             typeof="button"
             className="sideBtn"
-            onClick={() => navigateToPage("/PasswordRecover")}
+            onClick={() => navigateToPage("/RecoverPassword")}
           >
             Esqueceu a senha?
           </button>
@@ -63,7 +63,7 @@ function Login() {
         <button
           typeof="button"
           className="sideBtn"
-          onClick={() => navigateToPage("/CreateAccount")}
+          onClick={() => navigateToPage("/CreateUser")}
         >
           Ou crie sua conta
         </button>
