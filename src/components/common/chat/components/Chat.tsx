@@ -8,6 +8,7 @@ import { useCreateUserSpecification } from '../../../../features/upgrade/hooks/u
 import type { SpecsForm } from '../../../../features/upgrade/components/SpecsFormComponent.tsx';
 import type { UserSpecification } from '../../../../features/upgrade/types/type.ts';
 import type { Message } from '../../../../types/types.ts';
+import bot from "../../../../assets/trackbot.png";
 
 interface ChatProps {
   initialMessages?: Message[];
@@ -32,8 +33,17 @@ const Chat: React.FC<ChatProps> = ({ initialMessages = [], isUpgrade = false }) 
   const { createSpecification, loading: creating } = useCreateUserSpecification();
 
   const [specsForm, setSpecsForm] = useState<SpecsForm>({
-    placaMae: '', processador: '', memoriaRAM: '', placaVideo: '', ssd: '', hd: '', fonte: '', cooler: '',
-    hasPlacaVideo: true, hasSSD: true, hasHD: true
+    placaMae: '',
+    processador: '',
+    memoriaRAM: '',
+    placaVideo: '',
+    ssd: '',
+    hd: '',
+    fonte: '',
+    cooler: '',
+    hasPlacaVideo: true,
+    hasSSD: true,
+    hasHD: true
   });
 
   useEffect(() => setMessages(initialMessages), [initialMessages]);
@@ -105,8 +115,25 @@ const Chat: React.FC<ChatProps> = ({ initialMessages = [], isUpgrade = false }) 
   };
 
   const handleSpecsSubmit = async (data: UserSpecification) => {
+    if (!user) {
+      addMessage({ id: Date.now().toString(), text: "Você precisa estar logado para enviar suas especificações.", isUser: false, timestamp: new Date() });
+      return;
+    }
+
+    const payload = {
+      user_id: user.id,
+      cpu: data.cpu,
+      ram: data.ram,
+      motherboard: data.motherboard,
+      cooler: data.cooler,
+      gpu: data.gpu || "",
+      storage: data.storage || "",
+      psu: data.psu || "",
+    };
+    console.log("\u{1F4E6} Enviando especificações:", JSON.stringify(payload, null, 2));
+
     try {
-      await createSpecification(data);
+      await createSpecification(payload);
       setShowSpecsForm(false);
       setTimeout(() => {
         addMessage({ id: Date.now().toString(), text: "Ótimo, já coletei suas informações.", isUser: false, timestamp: new Date() });
@@ -119,6 +146,13 @@ const Chat: React.FC<ChatProps> = ({ initialMessages = [], isUpgrade = false }) 
 
   return (
     <div className="flex flex-col h-full w-full">
+      {!user && (
+        <div className="flex flex-col items-center mt-6">
+          <img src={bot} alt="TrackBot" />
+          <h2 className="text-2xl font-bold text-blue-600">Olá, eu sou o TrackBot</h2>
+          <p className="text-blue-600">Consultor de compras</p>
+        </div>
+      )}
       <div className="flex-1 overflow-y-auto">
         <div className="max-w-4xl mx-auto px-4 py-6">
           <MessageList
@@ -136,7 +170,11 @@ const Chat: React.FC<ChatProps> = ({ initialMessages = [], isUpgrade = false }) 
         </div>
       </div>
 
-      <ChatInput onSendMessage={handleSendMessage} disabled={isTyping || showSpecsForm || creating} />
+      <ChatInput
+        onSendMessage={handleSendMessage}
+        disabled={isTyping || showSpecsForm || creating}
+        autenticated={!!user}
+      />
     </div>
   );
 };

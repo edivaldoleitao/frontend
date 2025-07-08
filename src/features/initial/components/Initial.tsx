@@ -63,8 +63,7 @@ export default function Initial() {
             </>
           )}
         </div>
-      </header>
-
+      </header>   
       <main className="flex-1 flex items-center justify-center p-4">
         <Chat initialMessages={messages} />
       </main>

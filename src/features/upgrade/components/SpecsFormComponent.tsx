@@ -20,7 +20,7 @@ interface Props {
   specsForm: SpecsForm;
   onChange: (field: keyof SpecsForm, value: string | boolean) => void;
   onSubmit: (data: UserSpecification) => void;
-  userId: string | number;
+  userId: string;
 }
 
 const SpecsFormComponent: React.FC<Props> = ({ specsForm, onChange, onSubmit, userId }) => {

@@ -1,14 +1,17 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Send } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface ChatInputProps {
   onSendMessage: (message: string) => void;
   disabled?: boolean;
+  autenticated?: boolean;
 }
 
-const ChatInput = ({ onSendMessage, disabled = false }: ChatInputProps) => {
+const ChatInput = ({ onSendMessage, disabled = false, autenticated = false }: ChatInputProps) => {
   const [message, setMessage] = useState('');
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,6 +24,11 @@ const ChatInput = ({ onSendMessage, disabled = false }: ChatInputProps) => {
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
+
+      if (!autenticated) {
+        navigate("/login");
+        return;
+      }
       handleSubmit(e);
     }
   };
@@ -41,7 +49,7 @@ const ChatInput = ({ onSendMessage, disabled = false }: ChatInputProps) => {
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Digite sua mensagem..."
+            placeholder={autenticated ? "Digite sua mensagem..." : "Faça login para continuar"}
             disabled={disabled}
             rows={1}
             className="flex-1 bg-transparent border-none outline-none resize-none text-sm text-gray-800 placeholder-gray-400 min-h-[24px] max-h-[120px] disabled:opacity-50"
