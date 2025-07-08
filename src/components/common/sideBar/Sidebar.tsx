@@ -10,7 +10,7 @@ const Sidebar = () => {
       icon: Computer,
       text: "Qual o melhor para meu uso?",
       description: "Descubra produtos ideais",
-      path: "/descobrir"
+      path: "/"
     },
     {
       icon: ShoppingCart,
@@ -22,12 +22,12 @@ const Sidebar = () => {
       icon: Search,
       text: "Buscar as melhores ofertas",
       description: "Economize mais",
-      path: "/ofertas"
+      path: "/home"
     }
   ];
 
   return (
-    <aside className="w-80 bg-gradient-to-b from-blue-600 to-blue-800 text-white p-6 shadow-2xl">
+    <aside className="w-80 h-screen fixed left-0 top-0 bg-gradient-to-b from-blue-600 to-blue-800 text-white p-6 shadow-2xl overflow-y-auto z-10">
       <div className="mb-12">
         <div className="flex items-center mb-2">
           <img
