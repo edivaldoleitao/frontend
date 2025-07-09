@@ -1,4 +1,7 @@
-import type { CriarUsuarioRequest, CriarUsuarioResponse } from "../types/register";
+import type {
+  CriarUsuarioRequest,
+  CriarUsuarioResponse,
+} from "../types/register";
 import { apiRequest } from "../../../service/api";
 
 export async function criarUsuario(usuario: CriarUsuarioRequest): Promise<CriarUsuarioResponse> {

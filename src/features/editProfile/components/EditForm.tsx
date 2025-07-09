@@ -7,6 +7,7 @@ import { CategoriasSelector } from "../../../components/common/select/Categorias
 import { AlertMessage } from "../../../components/common/alert/AlertMessage.tsx";
 import { useAuth } from "../../../context/AuthContext.tsx";
 import { useEffect } from "react";
+import Error from "../../../components/layouts/error/Error.tsx";
 
 function Edit() {
   const {
@@ -29,7 +30,7 @@ function Edit() {
   } = useEdit();
 
   const { user } = useAuth();
-  if (!user) return null;
+  if (!user) return <Error />;
 
   useEffect(() => {
     if (user && user.id) {
