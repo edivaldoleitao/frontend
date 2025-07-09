@@ -3,9 +3,7 @@ import "./index.css";
 import InitialPage from "./pages/initial";
 import LoginPage from "./pages/login";
 import RegisterPage from "./pages/register";
-import DiscoverPage from "./pages/discover";
 import UpgradePage from "./pages/upgrade";
-import DealsPage from "./pages/deals";
 import EditProfile from "./pages/editProfile";
 import PrivateRoute from "./routes/PrivateRoute";
 import ProductPage from "./pages/productDetail/ProductDetail";
@@ -25,10 +23,6 @@ function App() {
           <Route path="/CreateUser" element={<RegisterPage />} />
           <Route path="/RecoverPassword" element={<RecoverPasswordPage />} />
           <Route path="/ChangePassword/:id" element={<ChangePasswordPage />} />
-          <Route path="/discover" element={<DiscoverPage />} />
-          <Route path="/" element={<InitialPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/CreateUser" element={<RegisterPage />} />
           <Route
             path="/EditProfile"
             element={
@@ -37,12 +31,9 @@ function App() {
               </PrivateRoute>
             }
           />
-          <Route path="/descobrir" element={<DiscoverPage />} />
-          <Route path="/upgrade" element={<UpgradePage />} />
-          <Route path="/ofertas" element={<DealsPage />} />
-          <Route path="/product/:id" element={<ProductPage />} />
-          <Route path="/deals" element={<DealsPage />} />
+          <Route path="/upgrade" element={<UpgradePage />} />          
           <Route path="/produtos" element={<ListProductsPage />} />
+          <Route path="/product/:id" element={<ProductPage />} />
         </Routes>
       </BrowserRouter>
     </div>

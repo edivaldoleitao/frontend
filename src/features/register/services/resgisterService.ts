@@ -4,9 +4,7 @@ import type {
 } from "../types/register";
 import { apiRequest } from "../../../service/api";
 
-export async function criarUsuario(
-  usuario: CriarUsuarioRequest
-): Promise<CriarUsuarioResponse> {
+export async function criarUsuario(usuario: CriarUsuarioRequest): Promise<CriarUsuarioResponse> {
   return await apiRequest<CriarUsuarioResponse>("/users/create/", {
     method: "POST",
     data: usuario,
