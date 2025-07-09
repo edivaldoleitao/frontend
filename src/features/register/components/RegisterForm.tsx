@@ -45,7 +45,7 @@ function Register() {
       navigate("/login");
     } else {
       setAlertType("error");
-      setAlertMessage("Formato do email está incorreto!");
+      setAlertMessage("Erro ao cadastrar usuário. Tente novamente mais tarde.");
     }
   };
 

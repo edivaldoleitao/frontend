@@ -1,9 +1,18 @@
-import React from 'react'
+import UpgradeChat from "../../features/upgrade/components/UpgradeChat";
+import Sidebar from "../../components/common/sideBar";
 
 const UpgradePage = () => {
   return (
-    <div>UpgradePage</div>
-  )
-}
+    <div className="min-h-screen h-screen flex">
+      <Sidebar />
 
-export default UpgradePage
+      <div className="flex flex-col flex-1 justify-end items-end h-full">
+        <div className="w-full">
+          <UpgradeChat />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default UpgradePage;
