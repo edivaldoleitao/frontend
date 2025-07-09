@@ -11,6 +11,7 @@ import HomePage from "./pages/home";
 import ListProductsPage from "./pages/listProducts";
 import RecoverPasswordPage from "./pages/forgotPassword/recoverPassword/RecoverPassword";
 import ChangePasswordPage from "./pages/forgotPassword/changePassword/ChangePassword";
+import ConfirmAccount from "./pages/confirmAccount/confirmAccount";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/CreateUser" element={<RegisterPage />} />
           <Route path="/RecoverPassword" element={<RecoverPasswordPage />} />
           <Route path="/ChangePassword/:id" element={<ChangePasswordPage />} />
+          <Route path="/ConfirmAccount/:id" element={<ConfirmAccount />} />
           <Route
             path="/EditProfile"
             element={
@@ -31,7 +33,7 @@ function App() {
               </PrivateRoute>
             }
           />
-          <Route path="/upgrade" element={<UpgradePage />} />          
+          <Route path="/upgrade" element={<UpgradePage />} />
           <Route path="/produtos" element={<ListProductsPage />} />
           <Route path="/product/:id" element={<ProductPage />} />
         </Routes>
