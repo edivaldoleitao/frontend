@@ -8,6 +8,7 @@ import EditProfile from "./pages/editProfile";
 import PrivateRoute from "./routes/PrivateRoute";
 import HomePage from "./pages/home";
 import ListProductsPage from "./pages/listProducts";
+import ConfirmAccount from "./pages/confirmAccount/confirmAccount";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/home" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/CreateUser" element={<RegisterPage />} />
+          <Route path="/ConfirmAccount/:id" element={<ConfirmAccount />} />
           <Route
             path="/EditProfile"
             element={
