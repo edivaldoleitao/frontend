@@ -1,3 +1,4 @@
+import type { User } from "../../../context/AuthContext.ts";
 import type { Product } from "../../../features/productDetail/types/productDetail.tsx";
 
 export interface favoriteCheck {
@@ -16,6 +17,7 @@ export interface favoriteProps {
   isOpen: boolean;
   setType: (value: "warning" | "error" | "success") => void;
   setError: (value: string | null) => void;
+  user: User | null | undefined;
 }
 
 export interface favoriteRequest {

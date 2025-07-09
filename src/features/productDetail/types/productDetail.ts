@@ -68,3 +68,23 @@ export interface ProductDatailLayout {
   rating: number;
   reviewCount: number;
 }
+
+export interface AlertCheck {
+  user_id: number;
+  product_id: number;
+}
+
+export interface Alert {
+  id: number;
+  user: number;
+  product: number;
+  desired_price: number;
+  is_active: boolean;
+  created_at: string;
+  expires_at: string;
+}
+
+export interface AlertCheckResponse {
+  isAlert: boolean;
+  alert?: Alert | null;
+}

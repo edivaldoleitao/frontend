@@ -1,6 +1,6 @@
 import "./ProductDetail.css";
 import PriceTable from "../../../components/common/priceTable/PriceTable";
-import { Bell, ChevronLeft } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useDetail } from "../hooks/useProductDetail";
 import Rating from "../../../components/common/rating/Rating";
@@ -10,11 +10,22 @@ import { AlertMessage } from "../../../components/common/alert/AlertMessage";
 import { useState } from "react";
 import AlertConfigModal from "../../../components/common/configPriceAlert/PriceAlert";
 import Favorite from "../../../components/common/favorite/Favorite";
+import PriceAlertBTN from "../../../components/common/configPriceAlert/PriceAlertbtn.tsx";
 
 function ProductDetailComponent() {
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
-  const { product, imgStore, loading, error, setError, type_alert, setType } =
-    useDetail();
+  const {
+    user,
+    product,
+    imgStore,
+    loading,
+    error,
+    setError,
+    type_alert,
+    setType,
+    alert,
+    setAlert,
+  } = useDetail();
   const navigate = useNavigate();
 
   if (loading) return <div className="text-4xl p-5">Carregando...</div>;
@@ -73,14 +84,14 @@ function ProductDetailComponent() {
                     isOpen={false}
                     setType={setType}
                     setError={setError}
+                    user={user}
                   />
-                  <button
-                    className="alert"
-                    onClick={() => setIsAlertModalOpen(true)}
-                  >
-                    <Bell className="w-5 h-5" />
-                    <span className="text-sm">Ativar alerta</span>
-                  </button>
+                  <PriceAlertBTN
+                    product={product.product}
+                    setIsAlertModalOpen={setIsAlertModalOpen}
+                    miniature={false}
+                    alert={alert}
+                  />
                 </div>
               </div>
             </div>
@@ -112,6 +123,10 @@ function ProductDetailComponent() {
         isOpen={isAlertModalOpen}
         onClose={() => setIsAlertModalOpen(false)}
         productName={product.product.name}
+        alert={alert}
+        user={user}
+        id_product={product.product.id}
+        setAlert={setAlert}
       />
     </div>
   );

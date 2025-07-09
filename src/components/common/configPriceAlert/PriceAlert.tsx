@@ -2,8 +2,16 @@ import { X } from "lucide-react";
 import { AlertMessage } from "../alert/AlertMessage";
 import type { AlertConfigModalProps } from "./index";
 import { usePriceAlert } from "./usePriceAlert";
+import { useEffect } from "react";
 
-const AlertConfigModal = ({ isOpen, onClose }: AlertConfigModalProps) => {
+const AlertConfigModal = ({
+  isOpen,
+  onClose,
+  alert,
+  setAlert,
+  user,
+  id_product,
+}: AlertConfigModalProps) => {
   const {
     type_alert,
     error,
@@ -13,8 +21,25 @@ const AlertConfigModal = ({ isOpen, onClose }: AlertConfigModalProps) => {
     duration,
     setDuration,
     loading,
+    setUser,
+    setProduct,
+    dateExpire,
+    setDateExpire,
+    priceExpected,
+    setPrice,
     handleSave,
-  } = usePriceAlert();
+    handleDelete,
+  } = usePriceAlert({ alert: alert, setAlert: setAlert });
+
+  useEffect(() => {
+    setAlert(alert);
+    if (alert) {
+      setDateExpire(alert.expires_at);
+      setPrice(String(alert.desired_price));
+    }
+    setProduct(id_product);
+    setUser(user);
+  }, [id_product, user, alert]);
 
   if (!isOpen) return null;
 
@@ -28,7 +53,7 @@ const AlertConfigModal = ({ isOpen, onClose }: AlertConfigModalProps) => {
     if (numericValue === "") return "";
 
     const formattedValue = (parseInt(numericValue) / 100).toFixed(2);
-    return formattedValue.replace(".", ",");
+    return formattedValue.replace(",", ".");
   };
 
   const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,7 +63,7 @@ const AlertConfigModal = ({ isOpen, onClose }: AlertConfigModalProps) => {
 
   return (
     <div className="fixed inset-0 bg-black/50 flex flex-col items-center justify-center z-50 p-4">
-      <div className="w-[50%]">
+      <div className="w-[25%]">
         {error && (
           <AlertMessage
             type={type_alert}
@@ -90,10 +115,10 @@ const AlertConfigModal = ({ isOpen, onClose }: AlertConfigModalProps) => {
               </label>
               <div className="space-y-2">
                 {[
-                  { value: "1", label: "1 mês" },
-                  { value: "3", label: "3 meses" },
-                  { value: "6", label: "6 meses" },
-                  { value: "12", label: "12 meses" },
+                  { value: 1, label: "1 mês" },
+                  { value: 3, label: "3 meses" },
+                  { value: 6, label: "6 meses" },
+                  { value: 12, label: "12 meses" },
                 ].map((option) => (
                   <div
                     key={option.value}
@@ -105,7 +130,7 @@ const AlertConfigModal = ({ isOpen, onClose }: AlertConfigModalProps) => {
                       name="duration"
                       value={option.value}
                       checked={duration === option.value}
-                      onChange={(e) => setDuration(e.target.value)}
+                      onChange={(e) => setDuration(parseInt(e.target.value))}
                       className="w-4 h-4 text-blue-600 border-2 border-gray-300 focus:ring-blue-500"
                     />
                     <label
@@ -118,14 +143,42 @@ const AlertConfigModal = ({ isOpen, onClose }: AlertConfigModalProps) => {
                 ))}
               </div>
             </div>
+            <div>
+              {alert ? (
+                <div>
+                  <div className="text-sm font-medium text-gray-700 mb-3 block">
+                    Alerta já criado:
+                  </div>
+                  <div className="text-left  text-gray-800">
+                    <li>Valor esperado: {priceExpected}</li>
+                    <li>Válido até: {dateExpire}</li>
+                  </div>
+                </div>
+              ) : (
+                ""
+              )}
+            </div>
+            <div className="flex flex-row">
+              {alert ? (
+                <button
+                  onClick={handleDelete}
+                  disabled={loading}
+                  className="w-full m-1 bg-red-600 hover:bg-red-700 text-white font-medium py-3 text-base rounded-md transition-colors"
+                >
+                  {loading ? "EXCLUINDO..." : "EXCLUIR"}
+                </button>
+              ) : (
+                ""
+              )}
 
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-3 text-base rounded-md transition-colors"
-            >
-              {loading ? "SALVANDO..." : "SALVAR"}
-            </button>
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full m-1 bg-green-600 hover:bg-green-700 text-white font-medium py-3 text-base rounded-md transition-colors"
+              >
+                {loading ? "SALVANDO..." : alert ? "ATUALIZAR" : "SALVAR"}
+              </button>
+            </div>
           </div>
         </form>
       </div>

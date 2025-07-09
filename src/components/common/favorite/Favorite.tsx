@@ -1,5 +1,4 @@
 import { Heart } from "lucide-react";
-import { useAuth } from "../../../context/AuthContext.tsx";
 import { useEffect, useState } from "react";
 import type {
   favoriteCheck,
@@ -10,10 +9,15 @@ import type {
 } from "./index.ts";
 import { apiRequest } from "../../../service/api.ts";
 
-function Favorite({ product, miniature, setType, setError }: favoriteProps) {
+function Favorite({
+  product,
+  miniature,
+  setType,
+  setError,
+  user,
+}: favoriteProps) {
   const [isFavorited, setFavorited] = useState(false);
   const [id_fav, setId] = useState<number>();
-  const { user } = useAuth();
 
   useEffect(() => {
     const CheckFavorite = async () => {
@@ -35,7 +39,7 @@ function Favorite({ product, miniature, setType, setError }: favoriteProps) {
             setId(response.id_fav);
           }
         } catch (error) {
-          console.error("Erro na busca do produto:", error);
+          console.error("Erro na busca do favorito:", error);
         }
       }
     };
@@ -82,9 +86,14 @@ function Favorite({ product, miniature, setType, setError }: favoriteProps) {
         setError("Produto favoritado com sucesso!");
       } catch (err: any) {
         setType("error");
-        setError("Erro ao favoritar o produto, Tente novamente mais tarde!");
+        setError(
+          "Não foi possível favoritar este produto no momento, tente novamente mais tarde"
+        );
         console.error("Erro na busca do produto:", err);
       }
+    } else {
+      setType("warning");
+      setError("É necessário estar logado para favoritar o produto");
     }
   };
 
@@ -96,9 +105,7 @@ function Favorite({ product, miniature, setType, setError }: favoriteProps) {
         }`}
         fill={isFavorited ? "currentColor" : "none"}
       />
-      <span className={`text-sm ${isFavorited ? " text-red-500" : ""}`}>
-        {miniature ? "" : "Salvar"}
-      </span>
+      <span className="text-sm">{miniature ? "" : "Salvar"}</span>
     </button>
   );
 }
