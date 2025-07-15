@@ -122,7 +122,10 @@ const AppBar = ({ onSearch }: AppBarProps) => {
     setSearchInput("");
     setShowSuggestions(false);
     setShowCategoryFilter(false);
-  };
+    onSearch("");
+    navigate("/produtos");
+  }
+
 
   return (
     <header className="bg-blue-600 text-white p-4 relative z-50">
@@ -153,9 +156,8 @@ const AppBar = ({ onSearch }: AppBarProps) => {
                 onKeyDown={handleKeyDown}
                 onFocus={handleInputFocus}
                 placeholder="Digite para buscar..."
-                className={`w-full py-2 pr-12 rounded-full text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-blue-300 ${
-                  selectedCategory ? "pl-40" : "pl-4"
-                }`}
+                className={`w-full py-2 pr-12 rounded-full text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-blue-300 ${selectedCategory ? "pl-40" : "pl-4"
+                  }`}
               />
 
               <div className="absolute right-3 top-2.5 flex items-center gap-2">
@@ -197,11 +199,10 @@ const AppBar = ({ onSearch }: AppBarProps) => {
                   <button
                     key={value}
                     onClick={() => handleCategorySelect(value)}
-                    className={`w-full text-left px-4 py-2 text-sm hover:bg-blue-100 ${
-                      selectedCategory === value
+                    className={`w-full text-left px-4 py-2 text-sm hover:bg-blue-100 ${selectedCategory === value
                         ? "bg-blue-50 text-blue-700 font-medium"
                         : "text-gray-700"
-                    }`}
+                      }`}
                   >
                     {label}
                   </button>
