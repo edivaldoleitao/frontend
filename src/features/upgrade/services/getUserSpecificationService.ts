@@ -3,7 +3,7 @@ import type { UserSpecification } from "../types/type";
 
 
 export async function getUserSpecificationService(userId: number): Promise<UserSpecification> {
-    return await apiRequest(`users/specification/${userId}/`, {
+    return await apiRequest(`/users/specification/${userId}/`, {
         method: "GET",
     });
 }

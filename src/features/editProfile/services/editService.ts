@@ -10,24 +10,27 @@ export async function changePassword(
   password: changePasswordRequest,
   id: number
 ) {
-  return await apiRequest<changePasswordResponse>(`/update_password/${id}/`, {
-    method: "PATCH",
-    data: password,
-  });
+  return await apiRequest<changePasswordResponse>(
+    `/users/update_password/${id}/`,
+    {
+      method: "PATCH",
+      data: password,
+    }
+  );
 }
 
 export async function changeUserData(
   userData: changeUserDataRequest,
   id: number
 ) {
-  return await apiRequest<changeUserDataResponse>(`/update_user/${id}/`, {
+  return await apiRequest<changeUserDataResponse>(`/users/update/${id}/`, {
     method: "PATCH",
     data: userData,
   });
 }
 
-export async function deleteUser(id: number) {
-  return await apiRequest<changeUserDataResponse>(`/delete_user/${id}/`, {
+export async function deleteUser(id: string) {
+  return await apiRequest<changeUserDataResponse>(`/users/delete/${id}/`, {
     method: "DELETE",
   });
 }

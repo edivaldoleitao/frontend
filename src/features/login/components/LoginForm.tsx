@@ -63,7 +63,7 @@ function Login() {
         <button
           typeof="button"
           className="sideBtn"
-          onClick={() => navigateToPage("/CreateUser")}
+          onClick={() => navigateToPage("/CreateAccount")}
         >
           Ou crie sua conta
         </button>

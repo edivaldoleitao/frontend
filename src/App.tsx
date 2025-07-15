@@ -13,6 +13,7 @@ import RecoverPasswordPage from "./pages/forgotPassword/recoverPassword/RecoverP
 import ChangePasswordPage from "./pages/forgotPassword/changePassword/ChangePassword";
 import ConfirmAccount from "./pages/confirmAccount/confirmAccount";
 import Favoritos from "./features/favorite/components/Favorite";
+import AlertPage from "./pages/alert/AlertPage";
 
 function App() {
   return (
@@ -22,10 +23,10 @@ function App() {
           <Route path="/" element={<InitialPage />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/CreateUser" element={<RegisterPage />} />
           <Route path="/RecoverPassword" element={<RecoverPasswordPage />} />
           <Route path="/ChangePassword/:id" element={<ChangePasswordPage />} />
           <Route path="/ConfirmAccount/:id" element={<ConfirmAccount />} />
+          <Route path="/CreateAccount" element={<RegisterPage />} />
           <Route
             path="/EditProfile"
             element={
@@ -38,6 +39,7 @@ function App() {
           <Route path="/upgrade" element={<UpgradePage />} />
           <Route path="/produtos" element={<ListProductsPage />} />
           <Route path="/product/:id" element={<ProductPage />} />
+          <Route path="/alertas" element={<AlertPage />} />
         </Routes>
       </BrowserRouter>
     </div>

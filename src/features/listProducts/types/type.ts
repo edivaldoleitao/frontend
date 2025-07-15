@@ -15,8 +15,10 @@ export interface ProductWithPrice {
   collection_date: string;  
   rating?: number; 
   reviewCount?: number;
+  favorite_id?: number ;
 }
 
 export interface ProductPriceResponse {
   products: ProductWithPrice[];
+  total: number;
 }
