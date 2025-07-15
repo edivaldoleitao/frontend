@@ -1,17 +1,36 @@
 import { useEffect, useState } from "react";
 import type { ProductWithPrice } from "../types/type";
 import { getProductsWithQuery } from "../services/getProductsWithQuery";
+import { useAuth } from "../../../context/AuthContext.tsx";
 
-export function useSearchProducts(query: string) {
+type Filters = {
+  seller?: string;
+  rating?: string;
+  price?: string;
+  brand?: string;
+};
+
+export function useSearchProducts(
+  name?: string,
+  category?: string,
+  page: number = 1,
+  perPage: number = 10,
+  filters?: Filters
+) {
   const [products, setProducts] = useState<ProductWithPrice[]>([]);
+  const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { user } = useAuth();
 
   useEffect(() => {
     let isMounted = true;
 
-    if (!query) {
+    const shouldFetch = name?.trim() || category?.trim() || (!name && !category);
+
+    if (!shouldFetch) {
       setProducts([]);
+      setTotal(0);
       return;
     }
 
@@ -20,9 +39,20 @@ export function useSearchProducts(query: string) {
 
     const fetchData = async () => {
       try {
-        const result = await getProductsWithQuery(query);
+        const offset = (page - 1) * perPage;
+
+        const result = await getProductsWithQuery(
+          name?.trim() || "",
+          category,
+          perPage,
+          offset,
+          user?.id,
+          filters 
+        );
+
         if (isMounted) {
           setProducts(result.products || []);
+          setTotal(result.total || 0);
         }
       } catch (err: any) {
         if (isMounted) {
@@ -40,7 +70,7 @@ export function useSearchProducts(query: string) {
     return () => {
       isMounted = false;
     };
-  }, [query]);
+  }, [name, category, page, perPage, JSON.stringify(filters)]); // ✅ adiciona filtros na dependência
 
-  return { products, loading, error };
+  return { products, total, loading, error };
 }

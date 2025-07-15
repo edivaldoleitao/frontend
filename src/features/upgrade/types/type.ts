@@ -1,5 +1,5 @@
 export interface UserSpecification {
-  user_id: string; 
+  user_id: number; 
   cpu: string;
   ram: string;
   motherboard: string;

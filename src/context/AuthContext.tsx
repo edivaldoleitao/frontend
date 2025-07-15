@@ -22,7 +22,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       try {
         const userData = await FetchUserData(token);
         console.log("Dados do usuário:", userData);
-        setUser(userData);
+        setUser({
+          ...userData,
+          id: Number(userData.id),
+        });
       } catch (error) {
         console.error("Erro ao buscar dados do usuário:", error);
         logout();

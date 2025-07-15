@@ -5,6 +5,7 @@ import useChatFlow from '../hooks/useChatFlow.ts';
 import { removeOptionsFromLastBotMessage } from '../hooks/useHandleOptionClick.ts';
 import { useAuth } from '../../../../context/AuthContext.tsx';
 import { useCreateUserSpecification } from '../../../../features/upgrade/hooks/useCreateUserSpecification.ts';
+import { getUserSpecificationService } from '../../../../features/upgrade/services/getUserSpecificationService.ts';
 import type { SpecsForm } from '../../../../features/upgrade/components/SpecsFormComponent.tsx';
 import type { UserSpecification } from '../../../../features/upgrade/types/type.ts';
 import type { Message } from '../../../../types/types.ts';
@@ -45,6 +46,31 @@ const Chat: React.FC<ChatProps> = ({ initialMessages = [], isUpgrade = false }) 
     hasSSD: true,
     hasHD: true
   });
+
+  useEffect(() => {
+    const loadExistingSpecs = async () => {
+      if (!user?.id) return;
+
+      const existing = await getUserSpecificationService(user.id);
+      if (existing) {
+        setSpecsForm({
+          placaMae: existing.motherboard ?? '',
+          processador: existing.cpu ?? '',
+          memoriaRAM: existing.ram ?? '',
+          placaVideo: existing.gpu ?? '',
+          ssd: existing.storage?.includes("SSD") ? existing.storage : '',
+          hd: existing.storage?.includes("HD") ? existing.storage : '',
+          fonte: existing.psu ?? '',
+          cooler: existing.cooler ?? '',
+          hasPlacaVideo: !!existing.gpu,
+          hasSSD: existing.storage?.includes("SSD") ?? true,
+          hasHD: existing.storage?.includes("HD") ?? true,
+        });
+      }
+    };
+
+    loadExistingSpecs();
+  }, [user]);
 
   useEffect(() => setMessages(initialMessages), [initialMessages]);
   useEffect(() => messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' }), [messages, showSpecsForm]);
@@ -155,6 +181,7 @@ const Chat: React.FC<ChatProps> = ({ initialMessages = [], isUpgrade = false }) 
       )}
       <div className="flex-1 overflow-y-auto">
         <div className="max-w-4xl mx-auto px-4 py-6">
+          
           <MessageList
             messages={messages}
             showSpecsForm={showSpecsForm}

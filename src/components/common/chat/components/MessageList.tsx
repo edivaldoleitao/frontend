@@ -7,7 +7,7 @@ interface Props {
   messages: Message[];
   showSpecsForm: boolean;
   isTyping: boolean;
-  userId?: string;
+  userId?: number;
   isUpgrade: boolean;
   specsForm: SpecsForm;
   onSpecsChange: (field: keyof SpecsForm, value: string | boolean) => void;
