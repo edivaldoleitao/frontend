@@ -1,7 +1,7 @@
 import { Search, User, ChevronDown } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import whiteLogo from "../../../assets/logoBranca.png";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import type { ProductWithPrice } from "../../../features/listProducts/types/type";
 import { getProductsWithQuery } from "../../../features/listProducts/services/getProductsWithQuery";
 
@@ -27,13 +27,24 @@ const AppBar = ({ onSearch }: AppBarProps) => {
   const [showCategoryFilter, setShowCategoryFilter] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
+
   const searchRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const getCategoryIfExists = (input: string): string | undefined => {
     return labelToCategory[input.trim().toLowerCase()];
   };
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const q = params.get("q");
+    const category = params.get("category");
+
+    if (q) setSearchInput(q);
+    if (category) setSelectedCategory(category);
+  }, [location.search]);
 
   useEffect(() => {
     const delayDebounce = setTimeout(async () => {
@@ -67,15 +78,15 @@ const AppBar = ({ onSearch }: AppBarProps) => {
 
   const handleCategorySelect = (categoryKey: string) => {
     setSelectedCategory(categoryKey);
-    setShowCategoryFilter(false);
     setSearchInput("");
     setShowSuggestions(false);
+    setShowCategoryFilter(false);
 
     if (categoryKey) {
       onSearch(categoryKey);
       navigate(`/produtos?category=${categoryKey}`);
     } else {
-      onSearch(""); 
+      onSearch("");
       navigate(`/produtos`);
     }
   };
@@ -123,7 +134,6 @@ const AppBar = ({ onSearch }: AppBarProps) => {
         <div className="flex-grow flex justify-center">
           <div className="w-full max-w-lg relative" ref={searchRef}>
             <div className="relative">
-              {/* Badge dentro do input */}
               {selectedCategory && (
                 <div className="absolute left-3 top-1/2 -translate-y-1/2 z-10 bg-blue-500 text-white text-xs px-3 py-1 rounded-full font-medium shadow-sm truncate max-w-[150px] flex items-center gap-1">
                   {categoryLabels[selectedCategory]}
@@ -143,11 +153,25 @@ const AppBar = ({ onSearch }: AppBarProps) => {
                 onKeyDown={handleKeyDown}
                 onFocus={handleInputFocus}
                 placeholder="Digite para buscar..."
-                className={`w-full py-2 pr-12 rounded-full text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-blue-300 ${selectedCategory ? "pl-40" : "pl-4"
-                  }`}
+                className={`w-full py-2 pr-12 rounded-full text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-blue-300 ${
+                  selectedCategory ? "pl-40" : "pl-4"
+                }`}
               />
 
               <div className="absolute right-3 top-2.5 flex items-center gap-2">
+                {searchInput && (
+                  <button
+                    onClick={() => {
+                      setSearchInput("");
+                      setShowSuggestions(false);
+                      onSearch("");
+                      navigate("/produtos");
+                    }}
+                    className="text-gray-400 hover:text-gray-600 font-bold text-lg leading-none"
+                  >
+                    ×
+                  </button>
+                )}
                 <button
                   onClick={() => setShowCategoryFilter(!showCategoryFilter)}
                   className="text-gray-400 hover:text-gray-600"
@@ -158,7 +182,6 @@ const AppBar = ({ onSearch }: AppBarProps) => {
               </div>
             </div>
 
-            {/* Dropdown de categorias */}
             {showCategoryFilter && (
               <div className="absolute left-0 right-0 mt-1 bg-white shadow-lg rounded-md overflow-hidden z-50">
                 <div className="px-4 py-2 text-sm font-medium text-gray-500 bg-gray-50 border-b">
@@ -174,10 +197,11 @@ const AppBar = ({ onSearch }: AppBarProps) => {
                   <button
                     key={value}
                     onClick={() => handleCategorySelect(value)}
-                    className={`w-full text-left px-4 py-2 text-sm hover:bg-blue-100 ${selectedCategory === value
-                      ? "bg-blue-50 text-blue-700 font-medium"
-                      : "text-gray-700"
-                      }`}
+                    className={`w-full text-left px-4 py-2 text-sm hover:bg-blue-100 ${
+                      selectedCategory === value
+                        ? "bg-blue-50 text-blue-700 font-medium"
+                        : "text-gray-700"
+                    }`}
                   >
                     {label}
                   </button>
@@ -185,7 +209,6 @@ const AppBar = ({ onSearch }: AppBarProps) => {
               </div>
             )}
 
-            {/* Sugestões de produtos */}
             {showSuggestions && suggestions.length > 0 && (
               <div className="absolute left-0 right-0 mt-1 bg-white shadow-lg rounded-md overflow-hidden max-h-60 overflow-y-auto z-50">
                 <div className="px-4 py-2 text-sm font-medium text-gray-500 bg-gray-50 border-b">

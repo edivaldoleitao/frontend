@@ -3,7 +3,7 @@ export default function Footer() {
     <footer className="bg-gray-900 text-white py-10 mt-12">
       <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
         <div>
-          <h4 className="text-lg font-semibold mb-4 text-purple-400">Peças populares</h4>
+          <h4 className="text-lg font-bold mb-4 text-white">Peças populares</h4>
           <ul className="space-y-2 text-sm text-gray-300">
             <li><a href="#" className="hover:underline">Placa-mãe</a></li>
             <li><a href="#" className="hover:underline">Processador</a></li>
@@ -16,7 +16,7 @@ export default function Footer() {
         </div>
 
         <div>
-          <h4 className="text-lg font-semibold mb-4 text-purple-400">TrackSave</h4>
+          <h4 className="text-lg font-bold mb-4 text-white">TrackSave</h4>
           <ul className="space-y-2 text-sm text-gray-300">
             <li><a href="#" className="hover:underline">Sobre nós</a></li>
             <li><a href="#" className="hover:underline">Como funciona</a></li>
@@ -26,7 +26,7 @@ export default function Footer() {
         </div>
 
         <div>
-          <h4 className="text-lg font-semibold mb-4 text-purple-400">Ajuda</h4>
+          <h4 className="text-lg font-bold mb-4 text-white">Ajuda</h4>
           <ul className="space-y-2 text-sm text-gray-300">
             <li><a href="#" className="hover:underline">Central de suporte</a></li>
             <li><a href="#" className="hover:underline">Contato</a></li>
@@ -35,7 +35,7 @@ export default function Footer() {
         </div>
 
         <div className="flex flex-col items-start">
-          <h4 className="text-lg font-semibold mb-4 text-purple-400">Conecte-se</h4>
+          <h4 className="text-lg font-bold mb-4 text-white">Conecte-se</h4>
           <div className="flex space-x-4 text-gray-300">
             <a href="#" className="hover:text-white"><i className="fab fa-facebook-f"></i></a>
             <a href="#" className="hover:text-white"><i className="fab fa-twitter"></i></a>
