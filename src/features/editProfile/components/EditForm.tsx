@@ -36,17 +36,12 @@ function Edit() {
     if (user && user.id) {
       setName(user.name);
       setEmail(user.email);
-      setId(user.id);
+      setId(user.id.toString());
       setSelectedCategories(user.categories);
     }
   }, [user, setId]);
 
   const navigate = useNavigate();
-
-  function navigateToPage(page: string) {
-    navigate(page);
-  }
-
   return (
     <div className="background">
       {error && (
@@ -58,7 +53,7 @@ function Edit() {
       )}
       <div className="pageContent">
         <div className="leftSide">
-          <ChevronLeft className="arrow" onClick={() => navigateToPage("/")} />
+          <ChevronLeft className="arrow" onClick={() => navigate(-1)} />
         </div>
         <form onSubmit={handleEdit}>
           <div className="form">

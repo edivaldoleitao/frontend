@@ -46,9 +46,6 @@ function ProductDetailComponent() {
       </div>
     );
 
-  function navigateToPage(page: string) {
-    navigate(page);
-  }
   return (
     <div>
       <div>
@@ -60,7 +57,8 @@ function ProductDetailComponent() {
               onClose={() => setError("")}
             />
           )}
-          <ChevronLeft className="arrow" onClick={() => navigateToPage("/home")} />
+          <ChevronLeft className="arrow" onClick={() => navigate(-1)} />
+
           <h1 className="productTittle">
             {product.product.name.toUpperCase()}
           </h1>
