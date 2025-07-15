@@ -7,7 +7,7 @@ import {
 import { useNavigate } from "react-router-dom";
 
 export const useEdit = () => {
-  const [id, setId] = useState("");
+  const [id, setId] = useState<number>();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -29,7 +29,9 @@ export const useEdit = () => {
           nova_senha: password,
           confirmar_senha: confirmPassword,
         };
-        await changePassword(changePasswordRequest, id);
+        if (id) {
+          await changePassword(changePasswordRequest, id);
+        }
       }
 
       const userData = {
@@ -37,8 +39,9 @@ export const useEdit = () => {
         email,
         categories: selectedCategories,
       };
-
-      await changeUserData(userData, id);
+      if (id) {
+        await changeUserData(userData, id);
+      }
     } catch (err: any) {
       setError(err.message || "Erro ao atualizar dados");
       return null;
@@ -52,7 +55,9 @@ export const useEdit = () => {
     setIsLoading(true);
     setError(null);
     try {
-      await deleteUser(id);
+      if (id) {
+        await deleteUser(id);
+      }
     } catch (err: any) {
       setError("Erro ao deletar a conta");
       return null;

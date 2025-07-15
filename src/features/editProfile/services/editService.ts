@@ -8,7 +8,7 @@ import { apiRequest } from "../../../service/api";
 
 export async function changePassword(
   password: changePasswordRequest,
-  id: string
+  id: number
 ) {
   return await apiRequest<changePasswordResponse>(`/update_password/${id}/`, {
     method: "PATCH",
@@ -18,7 +18,7 @@ export async function changePassword(
 
 export async function changeUserData(
   userData: changeUserDataRequest,
-  id: string
+  id: number
 ) {
   return await apiRequest<changeUserDataResponse>(`/update_user/${id}/`, {
     method: "PATCH",
@@ -26,7 +26,7 @@ export async function changeUserData(
   });
 }
 
-export async function deleteUser(id: string) {
+export async function deleteUser(id: number) {
   return await apiRequest<changeUserDataResponse>(`/delete_user/${id}/`, {
     method: "DELETE",
   });
