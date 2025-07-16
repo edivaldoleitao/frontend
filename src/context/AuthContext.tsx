@@ -21,7 +21,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
       try {
         const userData = await FetchUserData(token);
-        console.log("Dados do usuário:", userData);
         setUser({
           ...userData,
           id: Number(userData.id),

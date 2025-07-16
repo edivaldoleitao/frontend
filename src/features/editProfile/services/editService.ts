@@ -29,7 +29,7 @@ export async function changeUserData(
   });
 }
 
-export async function deleteUser(id: string) {
+export async function deleteUser(id: number) {
   return await apiRequest<changeUserDataResponse>(`/users/delete/${id}/`, {
     method: "DELETE",
   });

@@ -12,7 +12,7 @@ import ListProductsPage from "./pages/listProducts";
 import RecoverPasswordPage from "./pages/forgotPassword/recoverPassword/RecoverPassword";
 import ChangePasswordPage from "./pages/forgotPassword/changePassword/ChangePassword";
 import ConfirmAccount from "./pages/confirmAccount/confirmAccount";
-import Favoritos from "./features/favorite/components/Favorite";
+import Favoritos from "./pages/favorite/Favorite";
 import AlertPage from "./pages/alert/AlertPage";
 
 function App() {
@@ -35,6 +35,7 @@ function App() {
               </PrivateRoute>
             }
           />
+          <Route path="/favoritos" element={<Favoritos />} />
           <Route path="/favoritos/:id" element={<Favoritos />} />
           <Route path="/upgrade" element={<UpgradePage />} />
           <Route path="/produtos" element={<ListProductsPage />} />

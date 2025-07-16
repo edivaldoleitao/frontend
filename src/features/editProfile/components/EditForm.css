@@ -2,7 +2,7 @@
 
 @layer components {
   .background {
-    @apply bg-[#efedeb] w-[100wh] h-[100vh];
+    @apply bg-[#f5f5f5] w-[100wh] h-[100vh];
   }
 
   .pageContent {

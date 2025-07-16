@@ -1,47 +1,64 @@
 import React from "react";
-import { Heart } from "lucide-react";
 import "./ProdCard.css";
-
-interface Product {
-  id: number;
-  name: string;
-  model: string;
-  image: string;
-  isFavorite: boolean;
-}
+import type { Product } from "../../../features/favorite/types/favorite";
+import Favorite from "../favorite/Favorite";
+import type { User } from "../../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 interface ProductCardProps {
   product: Product;
-  onToggleFavorite: (productId: number) => void;
+  miniature: boolean;
+  isOpen: boolean;
+  setType: (value: "warning" | "error" | "success") => void;
+  setError: (value: string | null) => void;
+  user: User | null | undefined;
+  edit: boolean;
 }
 
 const ProdCard: React.FC<ProductCardProps> = ({
   product,
-  onToggleFavorite,
+  setError,
+  setType,
+  user,
+  edit,
 }) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/produtos?q=${product.product_name}`);
+  };
+
   return (
     <div className="product-card">
-      <div className="product-image-container">
-        <img
-          src={product.image}
-          alt={`${product.name} ${product.model}`}
-          className="product-image"
-        />
-        <button
-          className={`favorite-button ${product.isFavorite ? "active" : ""}`}
-          onClick={() => onToggleFavorite(product.id)}
-        >
-          <Heart
-            size={16}
-            fill={product.isFavorite ? "#ff4757" : "none"}
-            color={product.isFavorite ? "#ff4757" : "#666"}
+      <div onClick={handleClick}>
+        <div className="product-image-container">
+          <img
+            src={product.image_url}
+            alt={`${product.product_name}`}
+            className="product-image"
           />
-        </button>
+        </div>
+        <div className="product-info">
+          <h3 className="product-name">{product.product_name}</h3>
+          <p className="product-model">Adicionado em: {product.created_at}</p>
+        </div>
       </div>
-      <div className="product-info">
-        <h3 className="product-name">{product.name}</h3>
-        <p className="product-model">{product.model}</p>
-      </div>
+      {edit ? (
+        <div className="favorite-button">
+          <div className="">
+            <Favorite
+              product={product.product}
+              miniature={true}
+              isOpen={false}
+              setType={setType}
+              setError={setError}
+              user={user}
+            />
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

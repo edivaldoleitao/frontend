@@ -11,11 +11,12 @@ export interface ProductWithPrice {
   brand: string;
   image_url: string;
   store: StoreInfo;
-  price: string;             
-  collection_date: string;  
-  rating?: number; 
+  price: string;
+  price_id: number;
+  collection_date: string;
+  rating?: number;
   reviewCount?: number;
-  favorite_id?: number ;
+  favorite_id?: number;
 }
 
 export interface ProductPriceResponse {

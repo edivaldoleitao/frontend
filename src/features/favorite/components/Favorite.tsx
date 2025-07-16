@@ -1,100 +1,46 @@
-import { useState } from "react";
-import { ArrowLeft, Share2 } from "lucide-react";
+import { ChevronLeft, Share2 } from "lucide-react";
 import ProdCard from "../../../components/common/productCard/ProdCard";
 import "./Favorite.css";
-
-interface Product {
-  id: number;
-  name: string;
-  model: string;
-  image: string;
-  isFavorite: boolean;
-}
+import { useFavorite } from "../hooks/useFavorite.ts";
+import { AlertMessage } from "../../../components/common/alert/AlertMessage.tsx";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import ShareLink from "../../../components/common/shareLinks/ShareLinks.tsx";
 
 function Favoritos() {
-  const [products, setProducts] = useState<Product[]>([
-    {
-      id: 1,
-      name: "ASUS TUF Gaming",
-      model: "B550M-PLUS",
-      image: "/lovable-uploads/f6e01227-6636-4324-8acc-4b48180f8158.png",
-      isFavorite: true,
-    },
-    {
-      id: 2,
-      name: "ASUS Prime",
-      model: "A520M-K",
-      image: "/lovable-uploads/f6e01227-6636-4324-8acc-4b48180f8158.png",
-      isFavorite: true,
-    },
-    {
-      id: 3,
-      name: "Biostar B550MX/E",
-      model: "PRO",
-      image: "/lovable-uploads/f6e01227-6636-4324-8acc-4b48180f8158.png",
-      isFavorite: true,
-    },
-    {
-      id: 4,
-      name: "MSI B550M-A",
-      model: "PRO",
-      image: "/lovable-uploads/f6e01227-6636-4324-8acc-4b48180f8158.png",
-      isFavorite: true,
-    },
-    {
-      id: 5,
-      name: "ASUS TUF Gaming",
-      model: "B550M-PLUS",
-      image: "/lovable-uploads/f6e01227-6636-4324-8acc-4b48180f8158.png",
-      isFavorite: true,
-    },
-    {
-      id: 6,
-      name: "ASUS Prime",
-      model: "A520M-K",
-      image: "/lovable-uploads/f6e01227-6636-4324-8acc-4b48180f8158.png",
-      isFavorite: true,
-    },
-    {
-      id: 7,
-      name: "Biostar B550MX/E",
-      model: "PRO",
-      image: "/lovable-uploads/f6e01227-6636-4324-8acc-4b48180f8158.png",
-      isFavorite: true,
-    },
-    {
-      id: 8,
-      name: "MSI B550M-A",
-      model: "PRO",
-      image: "/lovable-uploads/f6e01227-6636-4324-8acc-4b48180f8158.png",
-      isFavorite: true,
-    },
-  ]);
+  const [shareDialogOpen, setShareDialogOpen] = useState(false);
+  const {
+    error,
+    setError,
+    type_alert,
+    setType,
+    isLoading,
+    user,
+    edit,
+    url,
+    products,
+  } = useFavorite();
 
-  const toggleFavorite = (productId: number) => {
-    setProducts((prevProducts) =>
-      prevProducts.map((product) =>
-        product.id === productId
-          ? { ...product, isFavorite: !product.isFavorite }
-          : product
-      )
-    );
-  };
+  const navigate = useNavigate();
 
   const handleShare = () => {
-    console.log("Compartilhar favoritos");
+    setShareDialogOpen(true);
   };
 
-  const handleGoBack = () => {
-    console.log("Voltar para página anterior");
-  };
+  if (isLoading) return <p>Carregando favoritos...</p>;
 
   return (
     <div className="favoritos-content">
+      {error && (
+        <AlertMessage
+          type={type_alert}
+          message={error}
+          onClose={() => setError("")}
+        />
+      )}
+
       <div className="favoritos-nav">
-        <button className="back-button" onClick={handleGoBack}>
-          <ArrowLeft size={24} />
-        </button>
+        <ChevronLeft className="arrow" onClick={() => navigate(-1)} />
         <h1 className="favoritos-title">Favoritos</h1>
         <button className="share-button" onClick={handleShare}>
           <span>Compartilhar</span>
@@ -103,16 +49,24 @@ function Favoritos() {
       </div>
 
       <div className="products-grid">
-        {products
-          .filter((product) => product.isFavorite)
-          .map((product) => (
-            <ProdCard
-              key={product.id}
-              product={product}
-              onToggleFavorite={toggleFavorite}
-            />
-          ))}
+        {products.map((product) => (
+          <ProdCard
+            key={product.product}
+            product={product}
+            miniature={false}
+            isOpen={false}
+            setType={setType}
+            setError={setError}
+            user={user}
+            edit={edit}
+          />
+        ))}
       </div>
+      <ShareLink
+        isOpen={shareDialogOpen}
+        onClose={() => setShareDialogOpen(false)}
+        link={url}
+      />
     </div>
   );
 }
