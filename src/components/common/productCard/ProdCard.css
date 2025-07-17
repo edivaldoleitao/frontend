@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+@layer components {
+  . {
+    @apply bg-red-500;
+  }
+
+  .product-card {
+    @apply bg-white rounded-xl p-4 shadow-md transition-transform duration-200 relative hover:-translate-y-0.5 hover:shadow-lg;
+  }
+
+  .product-image-container {
+    @apply relative mb-3;
+  }
+
+  .product-image {
+    @apply w-full h-[120px] object-contain rounded-lg bg-[#f9f9f9];
+  }
+
+  .favorite-button {
+    @apply absolute top-2 left-2 bg-white border-none rounded-full w-8 h-8 flex items-center justify-center cursor-pointer shadow-sm transition-transform duration-200;
+  }
+
+  .favorite-button:hover {
+    @apply scale-110;
+  }
+
+  .favorite-button.active {
+    @apply bg-[#fff5f5];
+  }
+
+  .product-info {
+    @apply text-left;
+  }
+
+  .product-name {
+    @apply text-sm font-semibold text-[#333] mb-1 leading-[1.2];
+  }
+
+  .product-model {
+    @apply text-xs text-[#666] m-0 leading-[1.2];
+  }
+
+  @media (max-width: 480px) {
+    .product-card {
+      @apply p-3;
+    }
+
+    .product-image {
+      @apply h-[100px];
+    }
+
+    .product-name {
+      @apply text-[0.8rem];
+    }
+
+    .product-model {
+      @apply text-[0.7rem];
+    }
+  }
+}
