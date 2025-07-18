@@ -24,7 +24,7 @@ function Favorite({
       if (user) {
         const data: favoriteCheck = {
           user_id: user.id,
-          product_id: product.id,
+          product_id: product,
         };
         try {
           const response = await apiRequest<favoriteCheckResponse>(
@@ -69,7 +69,7 @@ function Favorite({
 
       const dataRequest: favoriteRequest = {
         user_id: user.id,
-        product_id: product.id,
+        product_id: product,
         created_at: new Date().toISOString().slice(0, 10),
       };
       try {
@@ -98,7 +98,10 @@ function Favorite({
   };
 
   return (
-    <button className="save" onClick={handleFavorite}>
+    <button
+      className="flex justify-center align-middle"
+      onClick={handleFavorite}
+    >
       <Heart
         className={`w-5 h-5 transition-all ${
           isFavorited ? "fill-red-500 text-red-500" : ""

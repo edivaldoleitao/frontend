@@ -5,7 +5,6 @@ import { useAuth } from "../../../../../context/AuthContext.tsx";
 import { useAddFavorite } from "../../../../../features/home/hook/useAddFavorite.ts";
 import { deleteFavorite } from "../../../../../features/home/service/deleteFavorite.ts";
 
-
 interface ProductCardProps {
   productId: number;
   image: string;
@@ -13,6 +12,7 @@ interface ProductCardProps {
   badge?: string;
   badgeColor?: string;
   price: string;
+  price_id: number;
   seller: string;
   sellerLogo: string;
   rating: number;
@@ -29,6 +29,7 @@ const ListProductCard = ({
   badge,
   badgeColor = "bg-gradient-to-r from-amber-400 to-orange-500",
   price,
+  price_id,
   seller,
   sellerLogo,
   rating,
@@ -72,20 +73,24 @@ const ListProductCard = ({
     return Array.from({ length: 5 }, (_, index) => (
       <Star
         key={index}
-        className={`w-3.5 h-3.5 ${index < rating ? "text-amber-400 fill-amber-400" : "text-gray-300"}`}
+        className={`w-3.5 h-3.5 ${
+          index < rating ? "text-amber-400 fill-amber-400" : "text-gray-300"
+        }`}
       />
     ));
   };
 
   return (
     <Link
-      to={`/product/${productId}`}
+      to={`/product/${price_id}`}
       className="group block transform transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1"
     >
       <div className="flex flex-col h-full p-4 rounded-xl shadow-md bg-white relative min-h-[150px]">
         {badge && (
           <div className="absolute top-3 left-3 z-20">
-            <span className={`${badgeColor} text-white text-xs px-3 py-1.5 rounded-full font-semibold shadow-lg`}>
+            <span
+              className={`${badgeColor} text-white text-xs px-3 py-1.5 rounded-full font-semibold shadow-lg`}
+            >
               {badge}
             </span>
           </div>
@@ -99,7 +104,9 @@ const ListProductCard = ({
           >
             <Heart
               className={`w-4 h-4 transition-colors duration-200 ${
-                localLiked ? "text-red-500 fill-red-500" : "text-gray-400 hover:text-red-400"
+                localLiked
+                  ? "text-red-500 fill-red-500"
+                  : "text-gray-400 hover:text-red-400"
               }`}
             />
           </button>
@@ -125,29 +132,47 @@ const ListProductCard = ({
                   </h3>
 
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="flex items-center gap-1">{renderStars(rating)}</div>
-                    <span className="text-gray-500 text-sm font-medium">{rating.toFixed(1)}</span>
-                    <span className="text-gray-400 text-sm">({reviewCount.toLocaleString()} avaliações)</span>
+                    <div className="flex items-center gap-1">
+                      {renderStars(rating)}
+                    </div>
+                    <span className="text-gray-500 text-sm font-medium">
+                      {rating.toFixed(1)}
+                    </span>
+                    <span className="text-gray-400 text-sm">
+                      ({reviewCount.toLocaleString()} avaliações)
+                    </span>
                   </div>
 
                   <div className="flex items-center gap-2">
-                    <span className="text-gray-500 text-xs font-medium">Vendido por:</span>
+                    <span className="text-gray-500 text-xs font-medium">
+                      Vendido por:
+                    </span>
                     <div className="flex items-center gap-2">
-                      <img src={sellerLogo} alt={seller} className="h-5 w-auto object-contain" />
-                      <span className="text-gray-700 text-sm font-medium">{seller}</span>
+                      <img
+                        src={sellerLogo}
+                        alt={seller}
+                        className="h-5 w-auto object-contain"
+                      />
+                      <span className="text-gray-700 text-sm font-medium">
+                        {seller}
+                      </span>
                     </div>
                   </div>
                 </div>
 
                 <div className="mt-auto flex flex-col items-end gap-3">
                   {tag && (
-                    <span className={`${tagColor} text-white text-sm px-4 py-1.5 rounded-full font-semibold shadow-lg`}>
+                    <span
+                      className={`${tagColor} text-white text-sm px-4 py-1.5 rounded-full font-semibold shadow-lg`}
+                    >
                       {tag}
                     </span>
                   )}
 
                   <div className="text-right">
-                    <div className="text-2xl font-bold text-gray-900 mb-1">{price}</div>
+                    <div className="text-2xl font-bold text-gray-900 mb-1">
+                      {price}
+                    </div>
 
                     <button className="group/btn bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl font-semibold text-sm transition-all duration-200 shadow-lg hover:shadow-xl flex items-center gap-2">
                       <ShoppingBag className="w-4 h-4 group-hover/btn:scale-110 transition-transform duration-200" />

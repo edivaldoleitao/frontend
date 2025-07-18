@@ -20,7 +20,6 @@ const storeLogos: Record<string, string> = {
   Amazon: amazonLogo,
 };
 
-
 export default function ProductCard({ product }: ProductCardProps) {
   const {
     image_url,
@@ -35,9 +34,10 @@ export default function ProductCard({ product }: ProductCardProps) {
   } = product;
 
   const { add, loading, error } = useAddFavorite();
-  const [localFavoriteId, setLocalFavoriteId] = useState<number | null>(favorite_id ?? null);
+  const [localFavoriteId, setLocalFavoriteId] = useState<number | null>(
+    favorite_id ?? null
+  );
   const [localLiked, setLocalLiked] = useState(!!favorite_id);
-
 
   const { user } = useAuth();
   if (!user) return null;
@@ -85,8 +85,9 @@ export default function ProductCard({ product }: ProductCardProps) {
             className="h-8 w-8 rounded-full bg-white/90 shadow-md flex items-center justify-center"
           >
             <Heart
-              className={`h-4 w-4 transition-colors duration-200 ${localLiked ? "text-red-500 fill-red-500" : "text-gray-400"
-                }`}
+              className={`h-4 w-4 transition-colors duration-200 ${
+                localLiked ? "text-red-500 fill-red-500" : "text-gray-400"
+              }`}
             />
           </button>
         </div>
@@ -97,7 +98,6 @@ export default function ProductCard({ product }: ProductCardProps) {
             alt={store_name}
           />
         )}
-
       </div>
 
       <div className="p-4 flex flex-col justify-between flex-grow">
@@ -111,8 +111,11 @@ export default function ProductCard({ product }: ProductCardProps) {
               {[...Array(5)].map((_, i) => (
                 <Star
                   key={i}
-                  className={`h-4 w-4 ${i < Math.floor(rating) ? "text-yellow-400 fill-current" : "text-gray-300"
-                    }`}
+                  className={`h-4 w-4 ${
+                    i < Math.floor(rating)
+                      ? "text-yellow-400 fill-current"
+                      : "text-gray-300"
+                  }`}
                 />
               ))}
             </div>
@@ -124,17 +127,20 @@ export default function ProductCard({ product }: ProductCardProps) {
       <div className="px-4 pb-4 flex items-end justify-between mt-auto">
         <div className="flex flex-col">
           <span className="text-lg font-bold text-gray-900">R$ {price}</span>
-          {!available && <span className="text-sm text-red-500">Indisponível</span>}
+          {!available && (
+            <span className="text-sm text-red-500">Indisponível</span>
+          )}
         </div>
 
         <div className="flex gap-2">
           <button
             disabled={!available}
             onClick={(e) => e.stopPropagation()}
-            className={`text-white text-xs font-medium px-3 py-1 rounded transition-colors ${available
+            className={`text-white text-xs font-medium px-3 py-1 rounded transition-colors ${
+              available
                 ? "bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700"
                 : "bg-gray-300 cursor-not-allowed"
-              }`}
+            }`}
           >
             <ShoppingCart className="h-4 w-4 inline mr-1" />
             Comprar
@@ -152,7 +158,9 @@ export default function ProductCard({ product }: ProductCardProps) {
         </div>
       </div>
 
-      {error && <p className="text-xs text-red-500 mt-1 px-4">Erro ao favoritar</p>}
+      {error && (
+        <p className="text-xs text-red-500 mt-1 px-4">Erro ao favoritar</p>
+      )}
     </Link>
   );
 }

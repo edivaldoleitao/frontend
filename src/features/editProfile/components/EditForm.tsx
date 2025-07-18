@@ -36,7 +36,7 @@ function Edit() {
     if (user && user.id) {
       setName(user.name);
       setEmail(user.email);
-      setId(user.id.toString());
+      setId(user.id);
       setSelectedCategories(user.categories);
     }
   }, [user, setId]);

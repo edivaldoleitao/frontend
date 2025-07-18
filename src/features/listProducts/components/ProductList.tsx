@@ -16,12 +16,15 @@ interface ProductListProps {
 
 function iconStore(product: ProductWithPrice): string {
   const logos: Record<string, string> = {
-    Amazon: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg",
+    Amazon:
+      "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg",
     Kabum: "https://static.kabum.com.br/conteudo/icons/logo.svg",
     Terabyte: "https://img.terabyteshop.com.br/terabyte-logo.svg",
   };
 
-  return logos[product.store.name] || "https://via.placeholder.com/80x40?text=Loja";
+  return (
+    logos[product.store.name] || "https://via.placeholder.com/80x40?text=Loja"
+  );
 }
 
 const ProductList = ({ searchQuery, isCategory = false }: ProductListProps) => {
@@ -46,7 +49,7 @@ const ProductList = ({ searchQuery, isCategory = false }: ProductListProps) => {
     isCategory ? searchQuery : undefined,
     page,
     perPage,
-    filters 
+    filters
   );
 
   const hasActiveFilters = Object.values(filters).some(Boolean);
@@ -56,7 +59,7 @@ const ProductList = ({ searchQuery, isCategory = false }: ProductListProps) => {
       ...prev,
       [filterType]: value,
     }));
-    setPage(1); 
+    setPage(1);
   };
 
   useEffect(() => {
@@ -82,7 +85,9 @@ const ProductList = ({ searchQuery, isCategory = false }: ProductListProps) => {
               <div className="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center mb-4">
                 <AlertCircle className="w-8 h-8 text-red-500" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Erro ao carregar produtos</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                Erro ao carregar produtos
+              </h3>
               <p className="text-gray-500 mb-4">{error}</p>
               <button
                 onClick={() => window.location.reload()}
@@ -138,6 +143,7 @@ const ProductList = ({ searchQuery, isCategory = false }: ProductListProps) => {
                     image={product.image_url}
                     title={product.name}
                     price={`R$${product.price}`}
+                    price_id={product.price_id}
                     seller={product.store.name}
                     sellerLogo={iconStore(product)}
                     rating={product.rating || 0}

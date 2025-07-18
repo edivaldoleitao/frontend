@@ -77,7 +77,7 @@ function ProductDetailComponent() {
                 />
                 <div className="flex space-x-3 max-[400]:flex-col">
                   <Favorite
-                    product={product.product}
+                    product={product.product.id}
                     miniature={false}
                     isOpen={false}
                     setType={setType}

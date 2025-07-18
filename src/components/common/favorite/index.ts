@@ -1,5 +1,4 @@
 import type { User } from "../../../context/AuthContext.ts";
-import type { Product } from "../../../features/productDetail/types/productDetail.tsx";
 
 export interface favoriteCheck {
   user_id: number;
@@ -12,7 +11,7 @@ export interface favoriteCheckResponse {
 }
 
 export interface favoriteProps {
-  product: Product;
+  product: number;
   miniature: boolean;
   isOpen: boolean;
   setType: (value: "warning" | "error" | "success") => void;
