@@ -14,6 +14,7 @@ import ChangePasswordPage from "./pages/forgotPassword/changePassword/ChangePass
 import ConfirmAccount from "./pages/confirmAccount/confirmAccount";
 import Favoritos from "./pages/favorite/Favorite";
 import AlertPage from "./pages/alert/AlertPage";
+import NotFoundPage from "./pages/notFound";
 
 function App() {
   return (
@@ -41,6 +42,9 @@ function App() {
           <Route path="/produtos" element={<ListProductsPage />} />
           <Route path="/product/:id" element={<ProductPage />} />
           <Route path="/alertas" element={<AlertPage />} />
+
+          {/* Catch-all route for 404 Not Found */}
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
     </div>

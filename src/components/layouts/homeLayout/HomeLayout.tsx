@@ -6,9 +6,11 @@ import Footer from "../../common/footer/Footer";
 
 interface HomeLayoutProps {
   children: ReactNode;
+  showSearch?: boolean;
+  showFooter?: boolean;
 }
 
-const HomeLayout = ({ children }: HomeLayoutProps) => {
+const HomeLayout = ({ children, showSearch = true, showFooter = true }: HomeLayoutProps) => {
   const navigate = useNavigate();
 
   const handleSearch = (query: string) => {
@@ -17,9 +19,9 @@ const HomeLayout = ({ children }: HomeLayoutProps) => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <AppBar onSearch={handleSearch} />
+      <AppBar onSearch={handleSearch} showSearch={showSearch} />
       <main className="flex-1">{children}</main>
-      <Footer />
+      {showFooter && <Footer />}
     </div>
   );
 };

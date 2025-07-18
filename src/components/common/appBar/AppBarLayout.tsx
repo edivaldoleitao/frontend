@@ -18,9 +18,10 @@ const labelToCategory = Object.entries(categoryLabels).reduce(
 
 interface AppBarProps {
   onSearch: (query: string) => void;
+  showSearch?: boolean;
 }
 
-const AppBar = ({ onSearch }: AppBarProps) => {
+const AppBar = ({ onSearch , showSearch = true}: AppBarProps) => {
   const [searchInput, setSearchInput] = useState("");
   const [suggestions, setSuggestions] = useState<ProductWithPrice[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -47,6 +48,11 @@ const AppBar = ({ onSearch }: AppBarProps) => {
   }, [location.search]);
 
   useEffect(() => {
+    if (!showSearch) {
+      setShowSuggestions(false);
+      return;
+    }
+
     const delayDebounce = setTimeout(async () => {
       if (searchInput.trim().length > 1 || selectedCategory !== "") {
         const result = await getProductsWithQuery(searchInput, selectedCategory);
@@ -60,7 +66,7 @@ const AppBar = ({ onSearch }: AppBarProps) => {
     }, 300);
 
     return () => clearTimeout(delayDebounce);
-  }, [searchInput, selectedCategory]);
+  }, [showSearch, searchInput, selectedCategory]);
 
   const handleSelect = (query: string) => {
     setSearchInput(query);
@@ -149,39 +155,43 @@ const AppBar = ({ onSearch }: AppBarProps) => {
                 </div>
               )}
 
-              <input
-                type="text"
-                value={searchInput}
-                onChange={(e) => setSearchInput(e.target.value)}
-                onKeyDown={handleKeyDown}
-                onFocus={handleInputFocus}
-                placeholder="Digite para buscar..."
-                className={`w-full py-2 pr-12 rounded-full text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-blue-300 ${selectedCategory ? "pl-40" : "pl-4"
-                  }`}
-              />
+              {showSearch && (
+                <>
+                  <input
+                    type="text"
+                    value={searchInput}
+                    onChange={(e) => setSearchInput(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    onFocus={handleInputFocus}
+                    placeholder="Digite para buscar..."
+                    className={`w-full py-2 pr-12 rounded-full text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-blue-300 ${selectedCategory ? "pl-40" : "pl-4"
+                      }`}
+                  />
+                  <div className="absolute right-3 top-2.5 flex items-center gap-2">
+                    {searchInput && (
+                      <button
+                        onClick={() => {
+                          setSearchInput("");
+                          setShowSuggestions(false);
+                          onSearch("");
+                          navigate("/produtos");
+                        }}
+                        className="text-gray-400 hover:text-gray-600 font-bold text-lg leading-none"
+                      >
+                        ×
+                      </button>
+                    )}
+                    <button
+                      onClick={() => setShowCategoryFilter(!showCategoryFilter)}
+                      className="text-gray-400 hover:text-gray-600"
+                    >
+                      <ChevronDown className="w-4 h-4" />
+                    </button>
+                    <Search className="w-5 h-5 text-gray-400" />
+                  </div>
+                </>
+              )}
 
-              <div className="absolute right-3 top-2.5 flex items-center gap-2">
-                {searchInput && (
-                  <button
-                    onClick={() => {
-                      setSearchInput("");
-                      setShowSuggestions(false);
-                      onSearch("");
-                      navigate("/produtos");
-                    }}
-                    className="text-gray-400 hover:text-gray-600 font-bold text-lg leading-none"
-                  >
-                    ×
-                  </button>
-                )}
-                <button
-                  onClick={() => setShowCategoryFilter(!showCategoryFilter)}
-                  className="text-gray-400 hover:text-gray-600"
-                >
-                  <ChevronDown className="w-4 h-4" />
-                </button>
-                <Search className="w-5 h-5 text-gray-400" />
-              </div>
             </div>
 
             {showCategoryFilter && (
