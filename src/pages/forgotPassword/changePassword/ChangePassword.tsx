@@ -3,7 +3,7 @@ import ChangePassword from "../../../features/forgotPassword/changePassword/comp
 
 const ChangePasswordPage = () => {
   return (
-    <HomeLayout>
+    <HomeLayout showSearch={false}>
       <ChangePassword />
     </HomeLayout>
   );

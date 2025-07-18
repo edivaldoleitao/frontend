@@ -11,7 +11,7 @@ import HomePage from "./pages/home";
 import ListProductsPage from "./pages/listProducts";
 import RecoverPasswordPage from "./pages/forgotPassword/recoverPassword/RecoverPassword";
 import ChangePasswordPage from "./pages/forgotPassword/changePassword/ChangePassword";
-import ConfirmAccount from "./pages/confirmAccount/confirmAccount";
+import ConfirmAccount from "./pages/confirmAccount/ConfirmAccount";
 import Favoritos from "./pages/favorite/Favorite";
 import AlertPage from "./pages/alert/AlertPage";
 import NotFoundPage from "./pages/notFound";

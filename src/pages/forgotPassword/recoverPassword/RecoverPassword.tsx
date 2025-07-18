@@ -3,7 +3,7 @@ import RecoverPassword from "../../../features/forgotPassword/recoverPassword/co
 
 const RecoverPasswordPage = () => {
   return (
-    <HomeLayout>
+    <HomeLayout showSearch={false}>
       <RecoverPassword />
     </HomeLayout>
   );
