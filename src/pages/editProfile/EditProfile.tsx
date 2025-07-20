@@ -3,7 +3,7 @@ import Edit from "../../features/editProfile/components/EditForm";
 
 const EditProfile = () => {
   return (
-    <HomeLayout>
+    <HomeLayout showSearch={false}>
       <Edit />
     </HomeLayout>
   );

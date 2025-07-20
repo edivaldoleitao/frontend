@@ -3,7 +3,7 @@ import Favoritos from "../../features/favorite/components/Favorite";
 
 const FavoritePage = () => {
   return (
-    <HomeLayout>
+    <HomeLayout showSearch={false}>
       <Favoritos />
     </HomeLayout>
   );

@@ -45,8 +45,8 @@ export const AlertsScreen = () => {
     setCurrentIndex((prev) => (prev + 1) % totalPages);
   };
 
-  if (loading) return <p>Carregando alertas...</p>;
-  if (!products.length) return <p>Nenhum alerta encontrado.</p>;
+  if (loading) return <p className="my-4">Carregando alertas...</p>;
+  if (!products.length) return <p className="my-4">Nenhum alerta encontrado.</p>;
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-8">
