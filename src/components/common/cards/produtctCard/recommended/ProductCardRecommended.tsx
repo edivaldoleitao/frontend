@@ -22,6 +22,7 @@ const storeLogos: Record<string, string> = {
 
 export default function ProductCard({ product }: ProductCardProps) {
   const {
+    id,
     image_url,
     product_name,
     price,
@@ -68,7 +69,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
   return (
     <Link
-      to={`/product/${productId}`}
+      to={`/product/${id}`}
       className="group overflow-hidden border border-gray-200 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-white w-[290px] min-w-[240px] flex flex-col no-underline text-inherit"
     >
       <div className="relative overflow-hidden">

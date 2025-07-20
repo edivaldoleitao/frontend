@@ -11,9 +11,11 @@ import HomePage from "./pages/home";
 import ListProductsPage from "./pages/listProducts";
 import RecoverPasswordPage from "./pages/forgotPassword/recoverPassword/RecoverPassword";
 import ChangePasswordPage from "./pages/forgotPassword/changePassword/ChangePassword";
-import ConfirmAccount from "./pages/confirmAccount/confirmAccount";
+import ConfirmAccount from "./pages/confirmAccount/ConfirmAccount";
 import Favoritos from "./pages/favorite/Favorite";
 import AlertPage from "./pages/alert/AlertPage";
+import NotFoundPage from "./pages/notFound";
+import SubscriptionPage from "./pages/subscription/SubscriptionPage";
 
 function App() {
   return (
@@ -41,6 +43,10 @@ function App() {
           <Route path="/produtos" element={<ListProductsPage />} />
           <Route path="/product/:id" element={<ProductPage />} />
           <Route path="/alertas" element={<AlertPage />} />
+          <Route path="/assinatura" element={<SubscriptionPage />} />
+
+          {/* Catch-all route for 404 Not Found */}
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
     </div>

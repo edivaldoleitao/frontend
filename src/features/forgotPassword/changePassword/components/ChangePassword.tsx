@@ -15,6 +15,7 @@ function ChangePassword() {
     setError,
     type,
     handleChange,
+    countdown,
   } = useChange();
 
   const navigate = useNavigate();
@@ -61,8 +62,8 @@ function ChangePassword() {
                       placeholder="**********"
                       onChange={(e) => setConfirmPassword(e.target.value)}
                     />
-                    <button type="submit" className="btnDefault">
-                      {loading ? "Enviando..." : "Enviar"}
+                    <button type="submit" className="btnDefault" disabled={loading || countdown > 0}>
+                      {countdown > 0 ? `Redirecionando em ${countdown}...` : (loading ? "Enviando..." : "Enviar")}
                     </button>
                   </div>
                 </div>

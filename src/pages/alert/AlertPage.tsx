@@ -5,7 +5,7 @@ import HomeLayout from '../../components/layouts/homeLayout'
 
 const AlertPage = () => {
   return (
-   <HomeLayout>
+   <HomeLayout showSearch={false}>
         <AlertsScreen />
    </HomeLayout>
   )
