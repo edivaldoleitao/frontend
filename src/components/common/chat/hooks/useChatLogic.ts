@@ -92,7 +92,7 @@ export default function useChatLogic(initialMessages: Message[], isUpgrade: bool
                     setLastBotKey('investimento');
                 }, 1000);
             } else {
-                setLastBotKey(null); 
+                setLastBotKey(null);
             }
 
             return;
@@ -121,6 +121,19 @@ export default function useChatLogic(initialMessages: Message[], isUpgrade: bool
                     isUser: false,
                     timestamp: new Date(),
                 });
+                if (result?.produtos?.length) {
+                    result.produtos.forEach((produto) => {
+                        addMessage({
+                            id: (Date.now() + Math.random()).toString(),
+                            text: produto.name,
+                            isUser: false,
+                            timestamp: new Date(),
+                            image: produto.image_url,
+                            link: produto.url_product,
+                        });
+                    });
+                }
+
                 return;
             }
         }
