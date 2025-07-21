@@ -4,4 +4,6 @@ export interface Message {
   isUser: boolean;
   timestamp: Date;
   options?: string[];
+  image?: string;
+  link?: string;
 }

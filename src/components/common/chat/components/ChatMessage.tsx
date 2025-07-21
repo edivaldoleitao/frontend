@@ -33,13 +33,11 @@ const ChatMessage = ({
     return (
         <div className={containerClass}>
             <div className={bubbleClass}>
-                {/* Texto da mensagem */}
                 <div className="whitespace-pre-wrap break-words text-sm leading-relaxed">
                     {message}
                 </div>
 
-                {/* Opções (se existirem) */}
-                {options.length > 0 && !isUser && (
+               {options.length > 0 && !isUser && (
                     <div className="mt-3 flex flex-wrap gap-2">
                         {options.map((opt, idx) => (
                             <button
@@ -54,7 +52,6 @@ const ChatMessage = ({
                     </div>
                 )}
 
-                {/* Timestamp */}
                 <div className={timestampClass}>
                     {timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                 </div>
