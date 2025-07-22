@@ -12,14 +12,14 @@ import type { Message } from '../../../../types/types';
 
 export default function useChatLogic(initialMessages: Message[], isUpgrade: boolean) {
     const [messages, setMessages] = useState<Message[]>(initialMessages);
-    const [isTyping, _] = useState(false);
     const [showSpecsForm, setShowSpecsForm] = useState(false);
     const messagesEndRef = useRef<HTMLDivElement>(null);
+    const [conversationEnded, setConversationEnded] = useState(false);
 
     const { user } = useAuth();
     const { createSpecification, loading: creating } = useCreateUserSpecification();
-    const { data: recommendation, loading: fetching, sendRequest: fetchRecommendation } = useChatBot();
-    const { data: upgradeResponse, loading: loadingUpgrade, sendRequest: sendUpgradeRequest } = useUpgradeBot();
+    const { loading: fetching, sendRequest: fetchRecommendation } = useChatBot();
+    const { loading: loadingUpgrade, sendRequest: sendUpgradeRequest } = useUpgradeBot();
 
     const {
         payload,
@@ -68,10 +68,20 @@ export default function useChatLogic(initialMessages: Message[], isUpgrade: bool
         loadExistingSpecs();
     }, [user]);
 
-    useEffect(() => setMessages(initialMessages), [initialMessages]);
+    useEffect(() => {
+        setMessages(initialMessages);
+        setConversationEnded(false);
+    }, [initialMessages]);
     useEffect(() => messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' }), [messages, showSpecsForm]);
 
     const addMessage = (msg: Message) => setMessages(prev => [...prev, msg]);
+
+    const restartConversation = () => {
+        setPayload({});
+        setLastBotKey(null);
+        setShowSpecsForm(false);
+        setConversationEnded(false);
+    };
 
     const handleSendMessage = async (messageText: string) => {
         const now = new Date();
@@ -83,8 +93,8 @@ export default function useChatLogic(initialMessages: Message[], isUpgrade: bool
             return;
         }
 
-        if (lastBotKey === 'Jogos') {
-            setPayload((prev: typeof payload) => ({ ...prev, jogos: messageText }));
+        if (lastBotKey === 'detalhesUso') {
+            setPayload((prev: typeof payload) => ({ ...prev, usoDetalhado: messageText }));
 
             if (!isUpgrade) {
                 setTimeout(() => {
@@ -133,7 +143,7 @@ export default function useChatLogic(initialMessages: Message[], isUpgrade: bool
                         });
                     });
                 }
-
+                setConversationEnded(true);
                 return;
             }
         }
@@ -151,12 +161,12 @@ export default function useChatLogic(initialMessages: Message[], isUpgrade: bool
             if (["Trabalho", "Jogos", "Casual"].includes(messageText)) {
                 newPayload.uso = messageText;
             }
-            if (["Processador", "Memória RAM", "Placa de vídeo", "Fonte", "Teclado", "Mouse", "Headset", "Monitor"].includes(messageText)) {
+            if (["Processador", "Memória RAM", "Placa de vídeo", "Fonte", "HD/SSD", "Placa-mãe", "Teclado", "Mouse", "Monitor"].includes(messageText)) {
                 newPayload.subcategoria = messageText;
                 if (messageText === "Placa de vídeo") newPayload.uso = "Jogar";
             }
 
-            if (followUp.nextKey === "jogos") setLastBotKey("Jogos");
+            if (followUp.nextKey === "detalhesUso") setLastBotKey("detalhesUso");
             else if (followUp.nextKey === "investimento") setLastBotKey("investimento");
             else setLastBotKey(messageText);
 
@@ -263,18 +273,29 @@ export default function useChatLogic(initialMessages: Message[], isUpgrade: bool
         }
     };
 
+    const lastMessage = messages[messages.length - 1];
+    const botIsWaitingForOption =
+        lastMessage &&
+        !lastMessage.isUser &&
+        Array.isArray(lastMessage.options) &&
+        lastMessage.options.length > 0;
+
+    const isInputDisabled = fetching || loadingUpgrade || showSpecsForm || creating || conversationEnded || botIsWaitingForOption;
 
     return {
         messages,
-        isTyping: isTyping || fetching || loadingUpgrade,
+        isInputDisabled,
+        isTyping: fetching || loadingUpgrade,
         showSpecsForm,
         specsForm,
         user,
         messagesEndRef,
         creating,
+        conversationEnded,
         handleSendMessage,
         handleOptionClick,
         handleSpecsChange,
-        handleSpecsSubmit
+        handleSpecsSubmit,
+        restartConversation,
     };
 }
