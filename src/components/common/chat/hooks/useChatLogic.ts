@@ -182,11 +182,16 @@ export default function useChatLogic(initialMessages: Message[], isUpgrade: bool
             }, 1000);
             return;
         } else {
-            setTimeout(() => {
-                addMessage({ id: Date.now().toString(), text: "Agora, me diz: quanto você pretende investir?", isUser: false, timestamp: new Date() });
-                setLastBotKey('investimento');
-            }, 1000);
+            if (!isUpgrade) {
+                setTimeout(() => {
+                    addMessage({ id: Date.now().toString(), text: "Agora, me diz: quanto você pretende investir?", isUser: false, timestamp: new Date() });
+                    setLastBotKey('investimento');
+                }, 1000);
+            } else {
+                setLastBotKey(null);
+            }
         }
+
 
         if (isUpgrade && messages.some(m => m.text.includes("motivo do upgrade"))) {
             await handleUpgradeReason(messageText);
