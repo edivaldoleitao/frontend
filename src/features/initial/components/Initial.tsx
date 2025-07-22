@@ -11,6 +11,22 @@ interface Message {
   options?: string[];
 }
 
+const initialChatMessages: Message[] = [
+  {
+    id: "1",
+    text: "Olá, sou o TrackBot, seu assistente virtual responsável por te ajudar a encontrar o produto ideal para o seu uso. Para isso, me responde algumas perguntas rápidas:",
+    isUser: false,
+    timestamp: new Date(),
+  },
+  {
+    id: "2",
+    text: "Que tipo de produto você está procurando?",
+    isUser: false,
+    timestamp: new Date(),
+    options: ["Periférico", "Computador", "Componentes"],
+  },
+];
+
 export default function Initial() {
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -19,24 +35,14 @@ export default function Initial() {
   useEffect(() => {
     if (user) {
       const now = new Date();
-      setMessages([
-        {
-          id: "1",
-          text:
-            "Olá, sou o TrackBot, seu assistente virtual responsável por te ajudar a encontrar o produto ideal para o seu uso. Para isso, me responde algumas perguntas rápidas:",
-          isUser: false,
-          timestamp: now,
-        },
-        {
-          id: "2",
-          text: "Que tipo de produto você está procurando?",
-          isUser: false,
-          timestamp: now,
-          options: ["Periférico", "Computador", "Componentes"],
-        },
-      ]);
+      setMessages(initialChatMessages.map(m => ({ ...m, timestamp: now })));
     }
   }, [user]);
+
+  const handleRestart = () => {
+    const now = new Date();
+    setMessages(initialChatMessages.map(m => ({ ...m, timestamp: now })));
+  };
 
   return (
     <div className="flex-1 flex flex-col">
@@ -63,9 +69,9 @@ export default function Initial() {
             </>
           )}
         </div>
-      </header>   
+      </header>
       <main className="flex-1 flex items-center justify-center p-4">
-        <Chat initialMessages={messages} />
+        <Chat initialMessages={messages} onRestart={handleRestart} />
       </main>
     </div>
   );

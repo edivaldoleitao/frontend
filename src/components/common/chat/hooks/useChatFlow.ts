@@ -20,31 +20,63 @@ const useChatFlow = () => {
       options: ["Trabalho", "Jogos", "Casual"],
       nextKey: "uso",
     },
+    "Jogos": {
+      text: "Quais jogos e/ou tipos de jogos você deseja jogar?",
+      nextKey: "detalhesUso",
+    },
+    "Trabalho": {
+      text: "Ótimo! Como você pretende usar o computador no seu trabalho?",
+      nextKey: "detalhesUso",
+    },
+    "Casual": {
+      text: "Massa, me diz: como você quer usar o computador?",
+      nextKey: "detalhesUso",
+    },
     "Periférico": {
       text: "Legal! Está procurando qual tipo de periférico?",
-      options: ["Teclado", "Mouse", "Headset", "Monitor"],
+      options: ["Teclado", "Mouse", "Monitor"],
       nextKey: "subcategoria",
+    },
+    "Teclado": {
+      text: "Certo. Existe alguma característica que você busca? (Ex: mecânico, sem fio, com RGB)",
+      nextKey: "detalhesUso",
+    },
+    "Mouse": {
+      text: "Certo. Existe alguma característica que você busca? (Ex: sem fio, para jogos FPS, ergonômico)",
+      nextKey: "detalhesUso",
+    },
+    "Monitor": {
+      text: "Certo. Existe alguma característica que você busca? (Ex: tamanho, resolução, taxa de atualização)",
+      nextKey: "detalhesUso",
     },
     "Componentes": {
       text: "Show! Está procurando qual componente?",
-      options: ["Processador", "Memória RAM", "Placa de vídeo", "Fonte"],
+      options: ["Processador", "Memória RAM", "Placa de vídeo", "Fonte", "HD/SSD", "Placa-mãe"],
       nextKey: "subcategoria",
     },
     "Placa de vídeo": {
-      text: "Legal! Quais jogos você deseja jogar?",
-      nextKey: "jogos",
+      text: "Entendido. Para te ajudar melhor, quais jogos ou programas pesados você pretende usar?",
+      nextKey: "detalhesUso",
     },
-    "Jogos": {
-      text: "Quais jogos e/ou tipos de jogos você deseja jogar?",
-      nextKey: "jogos",
+    "Processador": {
+      text: "Entendido. Para te ajudar melhor, quais jogos ou programas pesados você pretende usar?",
+      nextKey: "detalhesUso",
     },
-    "Trabalho": {
-      text: "Beleza. Me diz: quanto você pretende investir?",
-      nextKey: "investimento",
+    "Memória RAM": {
+      text: "Entendido. Para te ajudar melhor, quais jogos ou programas pesados você pretende usar?",
+      nextKey: "detalhesUso",
     },
-    "Casual": {
-      text: "Tranquilo. Agora me diz: quanto você pretende investir?",
-      nextKey: "investimento",
+    "Fonte": {
+      text: "Entendido. Para te ajudar melhor, quais jogos ou programas pesados você pretende usar?",
+      nextKey: "detalhesUso",
+    },
+    "HD/SSD": {
+      text: "Entendido. Para te ajudar melhor, quais jogos ou programas pesados você pretende usar?",
+      nextKey: "detalhesUso",
+    },
+    "Placa-mãe": {
+      text: "Entendido. Para te ajudar melhor, quais jogos ou programas pesados você pretende usar?",
+      nextKey: "detalhesUso",
     },
   };
 

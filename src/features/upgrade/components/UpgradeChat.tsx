@@ -37,7 +37,27 @@ const UpgradeChat = () => {
 
   return (
     <div className="flex-1 flex items-center justify-center p-4 h-screen">
-      <Chat initialMessages={messages}  isUpgrade />
+      <Chat
+        initialMessages={messages}
+        isUpgrade
+        onRestart={() => setMessages([
+          {
+            id: "1",
+            text:
+              "Olá, sou o TrackBot, seu assistente virtual responsável por te ajudar com o upgrade da sua máquina. Para isso, preciso de algumas informações:",
+            isUser: false,
+            timestamp: new Date(),
+          },
+          {
+            id: "2",
+            text: "Você quer o upgrade...",
+            isUser: false,
+            timestamp: new Date(),
+            options: ["Para meu computador", "Para outro computador"],
+          },
+        ])}
+      />
+
     </div>
   );
 };
